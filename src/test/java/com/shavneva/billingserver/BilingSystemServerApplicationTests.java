@@ -1,4 +1,4 @@
-package com.shavneva.billingsystemserver;
+package com.shavneva.billingserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,0 +1,443 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: vnebe
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: user_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(100)
+              - column:
+                  name: last_name
+                  type: varchar(100)
+              - column:
+                  name: email
+                  type: varchar(100)
+              - column:
+                  name: number
+                  type: varchar(100)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: vnebe
+      comment: "Create admin user"
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: first_name
+                  value: "admin"
+              - column:
+                  name: last_name
+                  value: "admin"
+              - column:
+                  name: email
+                  value: "admin@gmail.com"
+              - column:
+                  name: number
+                  value: "+375290000000"
+              - column:
+                  name: password
+                  value: "admin"
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: first_name
+                  value: "guest"
+              - column:
+                  name: last_name
+                  value: "guest"
+              - column:
+                  name: email
+                  value: "guest@gmail.com"
+              - column:
+                  name: number
+                  value: "+375290000001"
+              - column:
+                  name: password
+                  value: "guest"
+
+  - changeSet:
+      id: 3
+      author: vnebe
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: role_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role_name
+                  type: varchar(100)
+  - changeSet:
+      id: 4
+      author: vnebe
+      changes:
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role_name
+                  value: "Админ"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role_name
+                  value: "Пользователь"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role_name
+                  value: "Бухгалтер"
+
+  - changeSet:
+      id: 5
+      author: vnebe
+      changes:
+        - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_roles_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: INT
+              - column:
+                  name: role_id
+                  type: INT
+  - changeSet:
+      id: 6
+      author: vnebe
+      changes:
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: "1"
+              - column:
+                  name: role_id
+                  value: "1"
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: "2"
+              - column:
+                  name: role_id
+                  value: "2"
+
+  - changeSet:
+      id: 7
+      author: vnebe
+      changes:
+        - createTable:
+            tableName: subscriber
+            columns:
+              - column:
+                  name: subscriber_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: INT
+              - column:
+                  name: tariff_id
+                  type: INT
+              - column:
+                  name: amount
+                  type: MONEY
+  - changeSet:
+      id: 8
+      author: vnebe
+      changes:
+        - insert:
+            tableName: subscriber
+            columns:
+              - column:
+                  name: user_id
+                  value: "1"
+              - column:
+                  name: tariff_id
+                  value: "1"
+              - column:
+                  name: amount
+                  value: "25"
+        - insert:
+            tableName: subscriber
+            columns:
+              - column:
+                  name: user_id
+                  value: "2"
+              - column:
+                  name: tariff_id
+                  value: "3"
+              - column:
+                  name: amount
+                  value: "30"
+
+  - changeSet:
+      id: 9
+      author: vnebe
+      changes:
+        - createTable:
+            tableName: tariff
+            columns:
+              - column:
+                  name: tariff_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: tariff_name
+                  type: varchar(100)
+              - column:
+                  name: price
+                  type: MONEY
+  - changeSet:
+      id: 10
+      author: vnebe
+      changes:
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: tariff_name
+                  value: "Тариф X"
+              - column:
+                  name: price
+                  value: "30"
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: tariff_name
+                  value: "Тариф Y"
+              - column:
+                  name: price
+                  value: "22"
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: tariff_name
+                  value: "Тариф Z"
+              - column:
+                  name: price
+                  value: "15"
+
+  - changeSet:
+      id: 11
+      author: vnebe
+      changes:
+        - createTable:
+            tableName: services
+            columns:
+              - column:
+                  name: service_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: service
+                  type: varchar(100)
+  - changeSet:
+      id: 12
+      author: vnebe
+      changes:
+        - insert:
+            tableName: services
+            columns:
+              - column:
+                  name: service
+                  value: "Безлимит минут внутри сети"
+        - insert:
+            tableName: services
+            columns:
+              - column:
+                  name: service
+                  value: "Безлимит на социальные сети"
+        - insert:
+            tableName: services
+            columns:
+              - column:
+                  name: service
+                  value: "50 минут в другие сети"
+        - insert:
+            tableName: services
+            columns:
+              - column:
+                  name: service
+                  value: "100 минут в другие сети"
+        - insert:
+            tableName: services
+            columns:
+              - column:
+                  name: service
+                  value: "1 гб с накоплением интернет-трафика"
+        - insert:
+            tableName: services
+            columns:
+              - column:
+                  name: service
+                  value: "8 гб с накоплением интернет-трафика"
+        - insert:
+            tableName: services
+            columns:
+              - column:
+                  name: service
+                  value: "20 гб с накоплением интернет-трафика"
+
+  - changeSet:
+      id: 13
+      author: vnebe
+      changes:
+        - createTable:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: service_tariffs_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: tariff_id
+                  type: INT
+              - column:
+                  name: service_id
+                  type: INT
+  - changeSet:
+      id: 14
+      author: vnebe
+      changes:
+        - insert:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: tariff_id
+                  value: "1"
+              - column:
+                  name: service_id
+                  value: "1"
+        - insert:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: tariff_id
+                  value: "1"
+              - column:
+                  name: service_id
+                  value: "2"
+        - insert:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: tariff_id
+                  value: "1"
+              - column:
+                  name: service_id
+                  value: "4"
+        - insert:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: tariff_id
+                  value: "1"
+              - column:
+                  name: service_id
+                  value: "7"
+        - insert:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: tariff_id
+                  value: "2"
+              - column:
+                  name: service_id
+                  value: "1"
+        - insert:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: tariff_id
+                  value: "2"
+              - column:
+                  name: service_id
+                  value: "2"
+        - insert:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: tariff_id
+                  value: "2"
+              - column:
+                  name: service_id
+                  value: "3"
+        - insert:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: tariff_id
+                  value: "2"
+              - column:
+                  name: service_id
+                  value: "6"
+        - insert:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: tariff_id
+                  value: "3"
+              - column:
+                  name: service_id
+                  value: "1"
+        - insert:
+            tableName: service_tariffs
+            columns:
+              - column:
+                  name: tariff_id
+                  value: "3"
+              - column:
+                  name: service_id
+                  value: "5"
+

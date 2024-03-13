@@ -1,7 +1,7 @@
-package com.shavneva.billingsystemserver.repository;
+package com.shavneva.billingserver.repository;
 
 import java.util.Optional;
-import com.shavneva.billingsystemserver.entities.User;
+import com.shavneva.billingserver.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

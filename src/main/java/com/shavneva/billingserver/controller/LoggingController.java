@@ -1,4 +1,4 @@
-package com.shavneva.billingsystemserver.controller;
+package com.shavneva.billingserver.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
