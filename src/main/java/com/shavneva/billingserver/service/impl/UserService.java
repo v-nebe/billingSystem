@@ -15,7 +15,6 @@ import java.util.List;
 public class UserService implements ICrudService<User>, UserDetailsService {
     private final UserRepository userRepository;
 
-
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -54,11 +53,13 @@ public class UserService implements ICrudService<User>, UserDetailsService {
     public void delete(Long id) {
         userRepository.deleteById(id);
     }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByNumber(username)
-                .orElseThrow();
-    }
+        User user = userRepository.findByEmail(username);
 
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
+    }
 }

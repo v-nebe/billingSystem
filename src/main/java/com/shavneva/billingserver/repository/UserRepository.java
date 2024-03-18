@@ -5,6 +5,6 @@ import com.shavneva.billingserver.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
-    Optional<User> findByNumber(String number);
+    User findByEmail(String email);
+   User findByNumber(String number);
 }
