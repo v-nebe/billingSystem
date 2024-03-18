@@ -436,6 +436,7 @@ databaseChangeLog:
               - column:
                   name: amount
                   type: MONEY
+        - createIndex:
   - changeSet:
       id: 14
       author: vnebe

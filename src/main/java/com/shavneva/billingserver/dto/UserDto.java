@@ -1,4 +1,4 @@
-package com.shavneva.billingserver.entities;
+package com.shavneva.billingserver.dto;
 import lombok.Data;
 
 @Data
