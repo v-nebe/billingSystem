@@ -48,9 +48,9 @@ public class UserController implements ICrudController<UserDto> {
 
     //update
     public UserDto update(int id, UserDto newDTO) {
-/*        if(!Objects.equals(id, newDTO.getUserId())){
+        if(!Objects.equals(id, newDTO.getUserId())){
             throw new IllegalArgumentException("IDs don't match");
-        }*/
+        }
         newDTO.setUserId(id);
         User updatedUser = userMapper.mapToEntity(newDTO);
         userService.update(id, updatedUser);
