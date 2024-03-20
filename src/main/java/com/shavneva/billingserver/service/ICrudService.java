@@ -7,11 +7,11 @@ import java.util.List;
 public interface ICrudService<E> {
     List<E> getAll();
 
-    E getById(Long id);
+    E getById(int id);
 
     E create(E user);
 
-    E update(Long id, E newEntity);
+    E update(int id, E newEntity);
 
-    void delete(Long id);
+    void delete(int id);
 }

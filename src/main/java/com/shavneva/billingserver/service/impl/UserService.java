@@ -21,9 +21,8 @@ public class UserService implements ICrudService<User>{
     public List<User> getAll() {
         return userRepository.findAll();
     }
-
     @Override
-    public User getById(Long id) {
+    public User getById(int id) {
         return userRepository.findById(id).orElse(null);
     }
 
@@ -33,7 +32,7 @@ public class UserService implements ICrudService<User>{
     }
 
     @Override
-    public User update(Long id, User newUser) {
+    public User update(int id, User newUser) {
         User existingUser = userRepository.findById(id).orElse(null);
         if (existingUser != null) {
             existingUser.setEmail(newUser.getEmail());
@@ -47,7 +46,7 @@ public class UserService implements ICrudService<User>{
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(int id) {
         userRepository.deleteById(id);
     }
 

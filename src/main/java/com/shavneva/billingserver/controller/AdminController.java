@@ -21,7 +21,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin")
-    public String  deleteUser(@RequestParam(required = true, defaultValue = "" ) Long userId,
+    public String  deleteUser(@RequestParam(required = true, defaultValue = "" ) int userId,
                               @RequestParam(required = true, defaultValue = "" ) String action,
                               Model model) {
         if (action.equals("delete")){
@@ -31,7 +31,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/get/{userId}")
-    public String  getUser(@PathVariable("userId") Long userId, Model model) {
+    public String  getUser(@PathVariable("userId") int userId, Model model) {
         model.addAttribute("allUsers", userService.getById(userId));
         return "admin";
     }

@@ -2,12 +2,15 @@ package com.shavneva.billingserver.controller.impl;
 
 import com.shavneva.billingserver.controller.ICrudController;
 import com.shavneva.billingserver.dto.UserDto;
+import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.service.impl.UserService;
 import com.shavneva.billingserver.converter.impl.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
 
@@ -24,9 +27,10 @@ public class UserController implements ICrudController<UserDto> {
     }
 
     //create
-    @Override
     public UserDto create(UserDto userDto) {
-        return null;
+        User newUser = userMapper.mapToEntity(userDto);
+        User createdUser = userService.create(newUser);
+        return userMapper.mapToDto(createdUser);
     }
 
     //read
@@ -36,20 +40,25 @@ public class UserController implements ICrudController<UserDto> {
                 .map(userMapper::mapToDto)
                 .collect(toList());
     }
-    public UserDto getById(@PathVariable Long id) {
+    public UserDto getById(@PathVariable int id) {
         return userMapper.mapToDto(
             userService.getById(id)
         );
     }
 
     //update
-    @Override
-    public UserDto update(Long id, UserDto newDTO) {
-        return null;
+    public UserDto update(int id, UserDto newDTO) {
+/*        if(!Objects.equals(id, newDTO.getUserId())){
+            throw new IllegalArgumentException("IDs don't match");
+        }*/
+        newDTO.setUserId(id);
+        User updatedUser = userMapper.mapToEntity(newDTO);
+        userService.update(id, updatedUser);
+        return userMapper.mapToDto(updatedUser);
     }
 
     //delete
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable int id) {
         userService.delete(id);
     }
 
