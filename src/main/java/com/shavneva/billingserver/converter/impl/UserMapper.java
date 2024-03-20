@@ -1,12 +1,15 @@
-package com.shavneva.billingserver.converter;
+package com.shavneva.billingserver.converter.impl;
 
+import com.shavneva.billingserver.converter.IMapper;
 import com.shavneva.billingserver.dto.UserDto;
 import com.shavneva.billingserver.entities.User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MappingUtils {
+public class UserMapper implements IMapper<User, UserDto> {
+
     //из entity в dto
+    @Override
     public UserDto mapToDto(User entity){
         UserDto dto = new UserDto ();
         dto.setUserId(entity.getUserId());
@@ -17,7 +20,9 @@ public class MappingUtils {
         dto.setPassword(entity.getPassword());
         return dto;
     }
+
     //из dto в entity
+    @Override
     public User mapToEntity(UserDto dto){
         User entity = new User();
         entity.setUserId(dto.getUserId());
@@ -28,4 +33,5 @@ public class MappingUtils {
         entity.setPassword(dto.getPassword());
         return entity;
     }
+
 }

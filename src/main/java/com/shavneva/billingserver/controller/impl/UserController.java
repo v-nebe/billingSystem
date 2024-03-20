@@ -2,9 +2,8 @@ package com.shavneva.billingserver.controller.impl;
 
 import com.shavneva.billingserver.controller.ICrudController;
 import com.shavneva.billingserver.dto.UserDto;
-import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.service.impl.UserService;
-import com.shavneva.billingserver.converter.MappingUtils;
+import com.shavneva.billingserver.converter.impl.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,36 +15,37 @@ import static java.util.stream.Collectors.toList;
 @RequestMapping("/api/users")
 public class UserController implements ICrudController<UserDto> {
     private final UserService userService;
-    private final MappingUtils mappingUtils;
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserController(UserService userService, MappingUtils mappingUtils) {
+    public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
-        this.mappingUtils = mappingUtils;
+        this.userMapper = userMapper;
     }
 
     //create
-    public UserDto create(@RequestBody User dto) {
-        return userService.create(dto);
+    @Override
+    public UserDto create(UserDto userDto) {
+        return null;
     }
 
     //read
     public List<UserDto> getAll() {
         return userService.getAll()
                 .stream()
-                .map(mappingUtils::mapToDto)
+                .map(userMapper::mapToDto)
                 .collect(toList());
     }
-
     public UserDto getById(@PathVariable Long id) {
-        return mappingUtils.mapToDto(
+        return userMapper.mapToDto(
             userService.getById(id)
         );
     }
 
     //update
-    public User update(@PathVariable Long id, @RequestBody User newUser) {
-        return userService.update(id, newUser);
+    @Override
+    public UserDto update(Long id, UserDto newDTO) {
+        return null;
     }
 
     //delete
