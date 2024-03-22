@@ -1,8 +1,12 @@
 package com.shavneva.billingserver.entities;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -21,14 +25,21 @@ public class User  implements UserDetails {
     @Column(name = "user_id")
     private Integer userId;
     @Column(name = "first_name")
+    @NotBlank
     private String firstName;
     @Column(name = "last_name")
+    @NotBlank
     private String lastName;
     @Column(name = "email")
+    @Email
+    @NotBlank
     private String email;
     @Column(name = "number")
+    @NotBlank
     private String number;
     @Column(name = "password")
+    @NotBlank
+    @Size(min = 5)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

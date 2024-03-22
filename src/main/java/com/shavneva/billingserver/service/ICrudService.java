@@ -11,7 +11,7 @@ public interface ICrudService<E> {
 
     E create(E user);
 
-    E update(int id, E newEntity);
+    E update(E newEntity);
 
     void delete(int id);
 }

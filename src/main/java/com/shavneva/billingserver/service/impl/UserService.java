@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserService implements ICrudService<User>{
@@ -32,8 +33,8 @@ public class UserService implements ICrudService<User>{
     }
 
     @Override
-    public User update(int id, User newUser) {
-        User existingUser = userRepository.findById(id).orElse(null);
+    public User update(User newUser) {
+        User existingUser = userRepository.findById(newUser.getUserId()).orElse(null);
         if (existingUser != null) {
             existingUser.setEmail(newUser.getEmail());
             existingUser.setFirstName(newUser.getFirstName());
@@ -42,7 +43,7 @@ public class UserService implements ICrudService<User>{
             existingUser.setPassword(newUser.getPassword());
             return userRepository.save(existingUser);
         }
-        return null;
+        throw new IllegalArgumentException("User not found. IDs don't match");
     }
 
     @Override

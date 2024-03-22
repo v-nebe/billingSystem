@@ -5,6 +5,10 @@ import com.shavneva.billingserver.dto.UserDto;
 import com.shavneva.billingserver.entities.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class UserMapper implements IMapper<User, UserDto> {
 
@@ -32,6 +36,13 @@ public class UserMapper implements IMapper<User, UserDto> {
         entity.setNumber(dto.getNumber());
         entity.setPassword(dto.getPassword());
         return entity;
+    }
+
+    @Override
+    public List<UserDto> map(List<User> e){
+        return e.stream()
+                .map(this::mapToDto)
+                .collect(toList());
     }
 
 }
