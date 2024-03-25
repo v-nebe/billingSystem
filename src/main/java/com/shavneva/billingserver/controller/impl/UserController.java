@@ -31,7 +31,7 @@ public class UserController implements ICrudController<UserDto> {
 
     //read
     public List<UserDto> getAll() {
-        return userMapper.map(userService.getAll());
+        return userMapper.mapAll(userService.getAll());
     }
     public UserDto getById(int id) {
         return userMapper.mapToDto(

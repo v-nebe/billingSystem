@@ -25,21 +25,14 @@ public class User  implements UserDetails {
     @Column(name = "user_id")
     private Integer userId;
     @Column(name = "first_name")
-    @NotBlank
     private String firstName;
     @Column(name = "last_name")
-    @NotBlank
     private String lastName;
     @Column(name = "email")
-    @Email
-    @NotBlank
     private String email;
     @Column(name = "number")
-    @NotBlank
     private String number;
     @Column(name = "password")
-    @NotBlank
-    @Size(min = 5)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

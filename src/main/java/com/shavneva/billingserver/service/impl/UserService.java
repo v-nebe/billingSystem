@@ -34,16 +34,15 @@ public class UserService implements ICrudService<User>{
 
     @Override
     public User update(User newUser) {
-        User existingUser = userRepository.findById(newUser.getUserId()).orElse(null);
-        if (existingUser != null) {
-            existingUser.setEmail(newUser.getEmail());
-            existingUser.setFirstName(newUser.getFirstName());
-            existingUser.setLastName(newUser.getLastName());
-            existingUser.setNumber(newUser.getNumber());
-            existingUser.setPassword(newUser.getPassword());
-            return userRepository.save(existingUser);
-        }
-        throw new IllegalArgumentException("User not found. IDs don't match");
+        User existingUser = userRepository.findById(newUser.getUserId()).orElseThrow(()->
+                new IllegalArgumentException("User not found. IDs don't match"));
+        existingUser.setEmail(newUser.getEmail());
+        existingUser.setFirstName(newUser.getFirstName());
+        existingUser.setLastName(newUser.getLastName());
+        existingUser.setNumber(newUser.getNumber());
+        existingUser.setPassword(newUser.getPassword());
+        return userRepository.save(existingUser);
+
     }
 
     @Override
