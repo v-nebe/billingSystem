@@ -101,13 +101,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: role_name
-                  value: "Админ"
+                  value: "ADMIN"
         - insert:
             tableName: role
             columns:
               - column:
                   name: role_name
-                  value: "Пользователь"
+                  value: "USER"
         - insert:
             tableName: role
             columns:

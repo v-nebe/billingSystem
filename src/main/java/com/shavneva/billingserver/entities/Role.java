@@ -1,6 +1,8 @@
 package com.shavneva.billingserver.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.util.Collection;
 import java.util.HashSet;
 
