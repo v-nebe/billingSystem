@@ -9,20 +9,20 @@ import java.util.List;
 
 public interface ICrudController<DTO> {
     //create
-    @PreAuthorize("hasRole('ROLE_ADMIN')or hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @PostMapping("/create")
     DTO create(@Valid @RequestBody DTO dto);
 
     //read
-    @PreAuthorize("hasRole('ROLE_ADMIN')or hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @GetMapping("/getAll")
     List<DTO> getAll();
-    @PreAuthorize("#id == authentication.principal.id or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("#id == authentication.principal.id or hasRole('ADMIN')")
     @GetMapping("/get/{id}")
     DTO getById(@Valid @PathVariable int id);
 
     //update
-    @PreAuthorize("hasRole('ROLE_ADMIN')or hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @PutMapping("/update")
     DTO update(@Valid @RequestBody DTO newDTO);
 
