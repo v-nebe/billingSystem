@@ -6,16 +6,12 @@ import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.service.impl.UserService;
 import com.shavneva.billingserver.converter.impl.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController implements ICrudController<UserDto> {
     private final UserService userService;
     private final UserMapper userMapper;
@@ -35,30 +31,23 @@ public class UserController implements ICrudController<UserDto> {
 
     //read
     public List<UserDto> getAll() {
-        return userService.getAll()
-                .stream()
-                .map(userMapper::mapToDto)
-                .collect(toList());
+        return userMapper.map(userService.getAll());
     }
-    public UserDto getById(@PathVariable int id) {
+    public UserDto getById(int id) {
         return userMapper.mapToDto(
             userService.getById(id)
         );
     }
 
     //update
-    public UserDto update(int id, UserDto newDTO) {
-        if(!Objects.equals(id, newDTO.getUserId())){
-            throw new IllegalArgumentException("IDs don't match");
-        }
-        newDTO.setUserId(id);
+    public UserDto update(UserDto newDTO) {
         User updatedUser = userMapper.mapToEntity(newDTO);
-        userService.update(id, updatedUser);
+        userService.update(updatedUser);
         return userMapper.mapToDto(updatedUser);
     }
 
     //delete
-    public void delete(@PathVariable int id) {
+    public void delete(int id) {
         userService.delete(id);
     }
 
