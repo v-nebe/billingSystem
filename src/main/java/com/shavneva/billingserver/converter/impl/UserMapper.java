@@ -38,11 +38,5 @@ public class UserMapper implements IMapper<User, UserDto> {
         return entity;
     }
 
-    @Override
-    public List<UserDto> map(List<User> e){
-        return e.stream()
-                .map(this::mapToDto)
-                .collect(toList());
-    }
 
 }

@@ -1,6 +1,11 @@
 package com.shavneva.billingserver.converter;
 
+import com.shavneva.billingserver.dto.UserDto;
+import com.shavneva.billingserver.entities.User;
+
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public interface IMapper<E, Dto> {
     //из entity в dto
@@ -9,6 +14,10 @@ public interface IMapper<E, Dto> {
     //из dto в entity
     E mapToEntity(Dto dto);
 
-    List<Dto> map(List<E> e);
+    default List<Dto> mapAll(List<E> e){
+        return e.stream()
+                .map(this::mapToDto)
+                .collect(toList());
+    }
 
 }
