@@ -1,17 +1,11 @@
 package com.shavneva.billingserver.service.impl;
 
-import com.shavneva.billingserver.entities.Role;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.repository.UserRepository;
 import com.shavneva.billingserver.service.ICrudService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,17 +20,7 @@ public class UserService implements ICrudService<User>{
 
     @Override
     public List<User> getAll() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        User currentUser = userRepository.findByEmail(email);
-        Collection<Role> roles = currentUser.getRoles();
-
-        if (roles.stream().map(role->role.getRoleName()).anyMatch(x->x.equals("ADMIN"))) {
-            return userRepository.findAll();
-        }
-
-
-        return Collections.singletonList(currentUser);
+        return userRepository.findAll();
     }
     @Override
     public User getById(int id) {
