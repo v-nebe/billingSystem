@@ -30,7 +30,7 @@ public class UserService implements ICrudService<User>{
         User currentUser = userRepository.findByEmail(email);
         Collection<Role> roles = currentUser.getRoles();
 
-        if (roles.stream().map(role->role.getRoleName()).anyMatch(x->x.equals("ADMIN"))) {
+        if (roles.stream().map(role->role.getRoleName()).anyMatch(x->x.equals("ROLE_ADMIN"))) {
             return userRepository.findAll();
         }
         return Collections.singletonList(currentUser);
