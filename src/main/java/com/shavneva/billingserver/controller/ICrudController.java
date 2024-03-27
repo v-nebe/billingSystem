@@ -19,8 +19,7 @@ public interface ICrudController<DTO> {
     @PostFilter("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/getAll")
     List<DTO> getAll();
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostFilter("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
     @GetMapping("/get/{id}")
     DTO getById(@Valid @PathVariable int id);
 
@@ -31,8 +30,8 @@ public interface ICrudController<DTO> {
     DTO update(@Valid @RequestBody DTO newDTO);
 
     //delete
-    @PreAuthorize("#id == authentication.principal.id or hasRole('ROLE_ADMIN')")
-    @PostFilter("#id == authentication.principal.id or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
+    @PostFilter("principal.userId == #id or hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     void delete(@Valid @PathVariable int id);
 }
