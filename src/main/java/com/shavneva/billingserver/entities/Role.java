@@ -1,9 +1,12 @@
 package com.shavneva.billingserver.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.Collection;
 import java.util.HashSet;
 
+@Data
 @Entity
 @Table(name = "role")
 public class Role {
@@ -13,7 +16,7 @@ public class Role {
     private Long roleId;
     @Column(name = "role_name")
     private String roleName;
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
     private Collection<User> users = new HashSet<>();
 
 }

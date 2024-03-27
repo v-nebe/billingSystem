@@ -35,7 +35,7 @@ public class UserController implements ICrudController<UserDto> {
     }
     public UserDto getById(int id) {
         return userMapper.mapToDto(
-            userService.getById(id)
+                userService.getById(id)
         );
     }
 
