@@ -16,7 +16,7 @@ public interface ICrudController<DTO> {
 
     //read
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-    @PostFilter("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    @PostFilter("hasRole('ROLE_ADMIN') or principal.userId == #id")
     @GetMapping("/getAll")
     List<DTO> getAll();
     @PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
@@ -25,6 +25,7 @@ public interface ICrudController<DTO> {
 
     //update
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    @PostFilter("hasRole('ROLE_ADMIN') or principal.userId == #id")
     @PutMapping("/update")
     DTO update(@Valid @RequestBody DTO newDTO);
 

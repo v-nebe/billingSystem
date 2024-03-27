@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class UserService implements ICrudService<User>{
@@ -25,15 +24,7 @@ public class UserService implements ICrudService<User>{
 
     @Override
     public List<User> getAll() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        User currentUser = userRepository.findByEmail(email);
-        Collection<Role> roles = currentUser.getRoles();
-
-        if (roles.stream().map(role->role.getRoleName()).anyMatch(x->x.equals("ROLE_ADMIN"))) {
             return userRepository.findAll();
-        }
-        return Collections.singletonList(currentUser);
     }
     @Override
     public User getById(int id) {
