@@ -113,7 +113,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: role_name
-                  value: "Бухгалтер"
+                  value: "ROLE_ACCOUNTANT"
 
   - changeSet:
       id: 5
