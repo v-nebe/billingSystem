@@ -101,19 +101,19 @@ databaseChangeLog:
             columns:
               - column:
                   name: role_name
-                  value: "ROLE_ADMIN"
+                  value: "Админ"
         - insert:
             tableName: role
             columns:
               - column:
                   name: role_name
-                  value: "ROLE_USER"
+                  value: "Пользователь"
         - insert:
             tableName: role
             columns:
               - column:
                   name: role_name
-                  value: "ROLE_ACCOUNTANT"
+                  value: "Бухгалтер"
 
   - changeSet:
       id: 5
@@ -465,3 +465,35 @@ databaseChangeLog:
               - column:
                   name: amount
                   value: "30"
+
+  -  changeSet:
+       id:  15
+       author:  vnebe
+       changes:
+         -  update:
+              catalogName:  billing
+              columns:
+                -  column:
+                     name:  role_name
+                     value:  "ROLE_ADMIN"
+              schemaName:  public
+              tableName:  role
+              where:  role_id='1'
+         - update:
+             catalogName: billing
+             columns:
+               - column:
+                   name: role_name
+                   value: "ROLE_USER"
+             schemaName: public
+             tableName: role
+             where: role_id='2'
+         - update:
+             catalogName: billing
+             columns:
+               - column:
+                   name: role_name
+                   value: "ROLE_ACCOUNTANT"
+             schemaName: public
+             tableName: role
+             where: role_id='3'
