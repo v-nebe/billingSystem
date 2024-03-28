@@ -1,13 +1,17 @@
 package com.shavneva.billingserver.service.impl;
 
+import com.shavneva.billingserver.entities.Role;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.repository.UserRepository;
 import com.shavneva.billingserver.service.ICrudService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class UserService implements ICrudService<User>{
@@ -20,7 +24,7 @@ public class UserService implements ICrudService<User>{
 
     @Override
     public List<User> getAll() {
-        return userRepository.findAll();
+            return userRepository.findAll();
     }
     @Override
     public User getById(int id) {
