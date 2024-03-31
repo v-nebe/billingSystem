@@ -2,6 +2,7 @@ package com.shavneva.billingserver.service.impl;
 
 import com.shavneva.billingserver.entities.Role;
 import com.shavneva.billingserver.entities.User;
+import com.shavneva.billingserver.exception.ResourceNotFoundException;
 import com.shavneva.billingserver.repository.UserRepository;
 import com.shavneva.billingserver.service.ICrudService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class UserService implements ICrudService<User>{
     }
     @Override
     public User getById(int id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " Not Found"));
     }
 
     @Override

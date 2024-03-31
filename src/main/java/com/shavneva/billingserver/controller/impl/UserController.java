@@ -5,11 +5,13 @@ import com.shavneva.billingserver.dto.UserDto;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.service.impl.UserService;
 import com.shavneva.billingserver.converter.impl.UserMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserController implements ICrudController<UserDto> {
@@ -20,6 +22,7 @@ public class UserController implements ICrudController<UserDto> {
     public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
+
     }
 
     //create
@@ -36,6 +39,7 @@ public class UserController implements ICrudController<UserDto> {
     public UserDto getById(int id) {
         return userMapper.mapToDto(
                 userService.getById(id)
+
         );
     }
 

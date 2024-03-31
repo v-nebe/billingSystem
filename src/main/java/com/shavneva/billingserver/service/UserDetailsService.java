@@ -1,4 +1,4 @@
-package com.shavneva.billingserver.service.impl;
+package com.shavneva.billingserver.service;
 
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.repository.UserRepository;
