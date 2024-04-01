@@ -48,8 +48,8 @@ public class UserController implements ICrudController<UserDto> {
     }
 
     //delete
-    public void delete(int id) {
-        userService.delete(id);
+    public String delete(int id) {
+       return userService.delete(id);
     }
 
 }

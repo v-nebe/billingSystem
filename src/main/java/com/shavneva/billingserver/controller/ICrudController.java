@@ -31,5 +31,5 @@ public interface ICrudController<DTO> {
     //delete
     @PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
-    void delete(@Valid @PathVariable int id);
+    String delete(@Valid @PathVariable int id);
 }
