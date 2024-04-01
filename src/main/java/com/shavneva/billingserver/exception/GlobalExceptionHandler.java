@@ -16,12 +16,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(ex.getMessage());
     }
 
-    @ExceptionHandler(AuthorizationServiceException.class)
-    public ResponseEntity<String> authorizationServiceException(AuthorizationServiceException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(ex.getMessage());
-    }
-
     @ExceptionHandler({SecurityException.class, AccessDeniedException.class})
     public ResponseEntity<String> securityException(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
