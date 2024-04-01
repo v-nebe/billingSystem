@@ -1,7 +1,5 @@
 package com.shavneva.billingserver.service;
 
-import com.shavneva.billingserver.entities.User;
-
 import java.util.List;
 
 public interface ICrudService<E> {
