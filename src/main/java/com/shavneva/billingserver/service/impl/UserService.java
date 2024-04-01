@@ -48,6 +48,7 @@ public class UserService implements ICrudService<User>{
     @Override
     public void delete(int id) {
         userRepository.deleteById(id);
+
     }
 
 }
