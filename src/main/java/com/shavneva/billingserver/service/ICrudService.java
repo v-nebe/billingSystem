@@ -7,7 +7,7 @@ public interface ICrudService<E> {
 
     E getById(int id);
 
-    E create(E user);
+    E create(E newE);
 
     E update(E newEntity);
 
