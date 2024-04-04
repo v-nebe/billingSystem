@@ -1,34 +1,58 @@
 package com.shavneva.billingserver.controller.impl;
 
 import com.shavneva.billingserver.controller.ICrudController;
+import com.shavneva.billingserver.converter.impl.TariffMapper;
 import com.shavneva.billingserver.dto.TariffDto;
+import com.shavneva.billingserver.entities.Tariff;
+import com.shavneva.billingserver.service.impl.TariffService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/tariffs")
 public class TariffController implements ICrudController<TariffDto> {
+
+    private final TariffService tariffService;
+    private final TariffMapper tariffMapper;
+
+    @Autowired
+    public TariffController(TariffService tariffService, TariffMapper tariffMapper) {
+        this.tariffService = tariffService;
+        this.tariffMapper = tariffMapper;
+    }
+
     @Override
     public TariffDto create(TariffDto tariffDto) {
-        return null;
+        Tariff newTariff = tariffMapper.mapToEntity(tariffDto);
+        Tariff createdTariff = tariffService.create(newTariff);
+        return tariffMapper.mapToDto(createdTariff);
     }
 
     @Override
     public List<TariffDto> getAll() {
-        return null;
+        return tariffMapper.mapAll(tariffService.getAll());
     }
 
     @Override
     public TariffDto getById(int id) {
-        return null;
+        return tariffMapper.mapToDto(
+                tariffService.getById(id)
+        );
     }
 
     @Override
     public TariffDto update(TariffDto newDTO) {
-        return null;
+        Tariff updatedTariff = tariffMapper.mapToEntity(newDTO);
+        tariffService.update(updatedTariff);
+        return tariffMapper.mapToDto(updatedTariff);
     }
 
     @Override
     public String delete(int id) {
-        return null;
+        return tariffService.delete(id);
     }
 }

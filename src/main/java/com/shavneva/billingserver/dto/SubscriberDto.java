@@ -4,9 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class ServiceDto {
-    Integer serviceId;
+public class SubscriberDto {
+    Integer subscriberId;
     @NotBlank
-    String service;
-
+    String amount;
 }

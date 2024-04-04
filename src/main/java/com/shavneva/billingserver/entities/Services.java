@@ -15,7 +15,7 @@ import java.util.HashSet;
 @AllArgsConstructor
 @Entity
 @Table(name = "services")
-public class Service {
+public class Services {
     @Id
     @GeneratedValue
     @Column(name = "service_id")

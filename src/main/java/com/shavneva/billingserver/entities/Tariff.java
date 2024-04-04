@@ -32,5 +32,5 @@ public class Tariff {
                     name = "tariff_id"),
             inverseJoinColumns = @JoinColumn(
                     name = "service_id"))
-    private Collection<Service> services = new HashSet<>();
+    private Collection<Services> services = new HashSet<>();
 }
