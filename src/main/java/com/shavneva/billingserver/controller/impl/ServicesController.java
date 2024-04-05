@@ -24,33 +24,28 @@ public class ServicesController implements ICrudController<ServiceDto> {
         this.servicesMapper = servicesMapper;
     }
 
-    @Override
     public ServiceDto create(ServiceDto serviceDto) {
         Services newService = servicesMapper.mapToEntity(serviceDto);
         Services createdService = servicesService.create(newService);
         return servicesMapper.mapToDto(createdService);
     }
 
-    @Override
     public List<ServiceDto> getAll() {
         return servicesMapper.mapAll(servicesService.getAll());
     }
 
-    @Override
     public ServiceDto getById(int id) {
         return servicesMapper.mapToDto(
                 servicesService.getById(id)
         );
     }
 
-    @Override
     public ServiceDto update(ServiceDto newDTO) {
         Services updatedService = servicesMapper.mapToEntity(newDTO);
         servicesService.update(updatedService);
         return servicesMapper.mapToDto(updatedService);
     }
 
-    @Override
     public String delete(int id) {
         return servicesService.delete(id);
     }

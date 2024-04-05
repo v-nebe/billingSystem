@@ -23,6 +23,6 @@ public class TariffMapper implements IMapper<Tariff, TariffDto> {
         entity.setTariffId(tariffDto.getTariffId());
         entity.setTariffName(tariffDto.getTariffName());
         entity.setPrice(tariffDto.getPrice());
-        return null;
+        return entity;
     }
 }

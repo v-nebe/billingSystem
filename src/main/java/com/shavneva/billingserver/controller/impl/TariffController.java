@@ -25,33 +25,28 @@ public class TariffController implements ICrudController<TariffDto> {
         this.tariffMapper = tariffMapper;
     }
 
-    @Override
     public TariffDto create(TariffDto tariffDto) {
         Tariff newTariff = tariffMapper.mapToEntity(tariffDto);
         Tariff createdTariff = tariffService.create(newTariff);
         return tariffMapper.mapToDto(createdTariff);
     }
 
-    @Override
     public List<TariffDto> getAll() {
         return tariffMapper.mapAll(tariffService.getAll());
     }
 
-    @Override
     public TariffDto getById(int id) {
         return tariffMapper.mapToDto(
                 tariffService.getById(id)
         );
     }
 
-    @Override
     public TariffDto update(TariffDto newDTO) {
         Tariff updatedTariff = tariffMapper.mapToEntity(newDTO);
         tariffService.update(updatedTariff);
         return tariffMapper.mapToDto(updatedTariff);
     }
 
-    @Override
     public String delete(int id) {
         return tariffService.delete(id);
     }
