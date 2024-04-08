@@ -43,6 +43,9 @@ public class User  implements UserDetails {
                     name = "role_id"))
     private Collection<Role> roles= new HashSet<>();
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Money money;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
