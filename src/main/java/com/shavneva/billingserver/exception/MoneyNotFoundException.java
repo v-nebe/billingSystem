@@ -1,4 +1,4 @@
-package com.shavneva.billingserver.repository;
+package com.shavneva.billingserver.exception;
 
 public class MoneyNotFoundException extends RuntimeException {
     public MoneyNotFoundException(String message) {

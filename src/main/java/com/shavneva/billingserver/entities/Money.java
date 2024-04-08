@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
 
 @Builder
 @Data
@@ -16,8 +16,11 @@ import org.springframework.data.annotation.Id;
 public class Money {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "money_id")
     private Integer moneyId;
+    @Column(name = "amount")
     private double amount;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;

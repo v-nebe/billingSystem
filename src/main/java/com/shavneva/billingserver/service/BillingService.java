@@ -2,8 +2,8 @@ package com.shavneva.billingserver.service;
 
 import com.shavneva.billingserver.entities.Money;
 import com.shavneva.billingserver.entities.User;
-import com.shavneva.billingserver.repository.InsufficientFundsException;
-import com.shavneva.billingserver.repository.MoneyNotFoundException;
+import com.shavneva.billingserver.exception.InsufficientFundsException;
+import com.shavneva.billingserver.exception.MoneyNotFoundException;
 import com.shavneva.billingserver.repository.MoneyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +38,5 @@ public class BillingService {
 
         money.setAmount(money.getAmount() + amount);
         moneyRepository.save(money);
-
     }
 }
