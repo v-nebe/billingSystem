@@ -6,6 +6,8 @@ import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.service.impl.UserService;
 import com.shavneva.billingserver.converter.impl.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public class UserController implements ICrudController<UserDto> {
     }
 
     //create
+    @PreAuthorize("permitAll()")
     public UserDto create(UserDto userDto) {
         User newUser = userMapper.mapToEntity(userDto);
         User createdUser = userService.create(newUser);
@@ -31,9 +34,12 @@ public class UserController implements ICrudController<UserDto> {
     }
 
     //read
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    @PostFilter("hasRole('ROLE_ADMIN') or filterObject.email == authentication.name")
     public List<UserDto> getAll() {
         return userMapper.mapAll(userService.getAll());
     }
+    @PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
     public UserDto getById(int id) {
         return userMapper.mapToDto(
                 userService.getById(id)
@@ -41,6 +47,7 @@ public class UserController implements ICrudController<UserDto> {
     }
 
     //update
+    @PreAuthorize("#newDTO.email == authentication.principal.email or hasRole('ROLE_ADMIN')")
     public UserDto update(UserDto newDTO) {
         User updatedUser = userMapper.mapToEntity(newDTO);
         userService.update(updatedUser);
@@ -48,6 +55,7 @@ public class UserController implements ICrudController<UserDto> {
     }
 
     //delete
+    @PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
     public String delete(int id) {
        return userService.delete(id);
     }

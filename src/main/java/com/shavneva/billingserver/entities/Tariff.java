@@ -17,7 +17,7 @@ import java.util.HashSet;
 @Table(name = "tariff")
 public class Tariff {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tariff_id")
     private Integer tariffId;
     @Column(name = "tariff_name")
