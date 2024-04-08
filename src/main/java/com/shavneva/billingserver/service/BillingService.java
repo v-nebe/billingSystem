@@ -38,5 +38,6 @@ public class BillingService {
 
         money.setAmount(money.getAmount() + amount);
         moneyRepository.save(money);
+
     }
 }
