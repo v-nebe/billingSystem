@@ -1,7 +1,5 @@
 package com.shavneva.billingserver.service;
 
-import com.shavneva.billingserver.entities.User;
-
 import java.util.List;
 
 public interface ICrudService<E> {
@@ -13,5 +11,5 @@ public interface ICrudService<E> {
 
     E update(E newEntity);
 
-    void delete(int id);
+    String delete(int id);
 }

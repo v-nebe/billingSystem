@@ -1,16 +1,12 @@
 package com.shavneva.billingserver.service.impl;
 
-import com.shavneva.billingserver.entities.Role;
 import com.shavneva.billingserver.entities.User;
+import com.shavneva.billingserver.exception.ResourceNotFoundException;
 import com.shavneva.billingserver.repository.UserRepository;
 import com.shavneva.billingserver.service.ICrudService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -28,7 +24,7 @@ public class UserService implements ICrudService<User>{
     }
     @Override
     public User getById(int id) {
-        return userRepository.findById(id).orElse(null);
+            return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " Not Found"));
     }
 
     @Override
@@ -39,7 +35,7 @@ public class UserService implements ICrudService<User>{
     @Override
     public User update(User newUser) {
         User existingUser = userRepository.findById(newUser.getUserId()).orElseThrow(()->
-                new IllegalArgumentException("User not found. IDs don't match"));
+                new ResourceNotFoundException("User not found. IDs don't match"));
         existingUser.setEmail(newUser.getEmail());
         existingUser.setFirstName(newUser.getFirstName());
         existingUser.setLastName(newUser.getLastName());
@@ -50,8 +46,11 @@ public class UserService implements ICrudService<User>{
     }
 
     @Override
-    public void delete(int id) {
-        userRepository.deleteById(id);
+    public String delete(int id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid user Id:" + id));
+        userRepository.delete(user);
+        return "User has been deleted ";
     }
 
 }
