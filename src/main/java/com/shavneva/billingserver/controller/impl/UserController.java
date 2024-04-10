@@ -56,8 +56,8 @@ public class UserController implements ICrudController<UserDto> {
 
     //delete
     @PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
-    public String delete(int id) {
-       return userService.delete(id);
+    public void delete(int id) {
+        userService.delete(id);
     }
 
 }

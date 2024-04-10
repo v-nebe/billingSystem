@@ -44,10 +44,9 @@ public class TariffService implements ICrudService<Tariff> {
     }
 
     @Override
-    public String delete(int id) {
+    public void delete(int id) {
         Tariff tariff = tariffRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid tariff Id:" + id));
         tariffRepository.delete(tariff);
-        return "Tariff has been deleted ";
     }
 }

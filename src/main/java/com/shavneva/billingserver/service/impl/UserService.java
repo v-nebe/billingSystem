@@ -46,11 +46,10 @@ public class UserService implements ICrudService<User>{
     }
 
     @Override
-    public String delete(int id) {
+    public void delete(int id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid user Id:" + id));
         userRepository.delete(user);
-        return "User has been deleted ";
     }
 
 }

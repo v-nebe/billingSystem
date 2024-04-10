@@ -47,7 +47,7 @@ public class TariffController implements ICrudController<TariffDto> {
         return tariffMapper.mapToDto(updatedTariff);
     }
 
-    public String delete(int id) {
-        return tariffService.delete(id);
+    public void delete(int id) {
+        tariffService.delete(id);
     }
 }

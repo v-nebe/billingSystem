@@ -44,10 +44,9 @@ public class ServicesService implements ICrudService<Services> {
     }
 
     @Override
-    public String delete(int id) {
+    public void delete(int id) {
         Services services = serviceRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid service Id:" + id));
         serviceRepository.delete(services);
-        return "Service has been deleted ";
     }
 }

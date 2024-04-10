@@ -46,7 +46,7 @@ public class ServicesController implements ICrudController<ServiceDto> {
         return servicesMapper.mapToDto(updatedService);
     }
 
-    public String delete(int id) {
-        return servicesService.delete(id);
+    public void delete(int id) {
+        servicesService.delete(id);
     }
 }

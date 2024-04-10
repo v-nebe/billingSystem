@@ -26,5 +26,5 @@ public interface ICrudController<DTO> {
 
     //delete
     @DeleteMapping("/delete/{id}")
-    String delete(@Valid @PathVariable int id);
+    void delete(@Valid @PathVariable int id);
 }
