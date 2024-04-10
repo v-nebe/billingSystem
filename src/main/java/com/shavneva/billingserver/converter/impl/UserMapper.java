@@ -1,13 +1,7 @@
 package com.shavneva.billingserver.converter.impl;
 
 import com.shavneva.billingserver.converter.IMapper;
-import com.shavneva.billingserver.dto.UserDto;
-import com.shavneva.billingserver.entities.User;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class UserMapper implements IMapper<User, UserDto> {

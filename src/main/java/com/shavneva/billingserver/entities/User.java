@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name = "user")
 public class User  implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Integer userId;
     @Column(name = "first_name")
@@ -42,6 +42,9 @@ public class User  implements UserDetails {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id"))
     private Collection<Role> roles= new HashSet<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Money money;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,8 +1,5 @@
 package com.shavneva.billingserver.converter;
 
-import com.shavneva.billingserver.dto.UserDto;
-import com.shavneva.billingserver.entities.User;
-
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
