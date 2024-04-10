@@ -44,7 +44,7 @@ public class User  implements UserDetails {
     private Collection<Role> roles= new HashSet<>();
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Money money;
+    private Account account;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

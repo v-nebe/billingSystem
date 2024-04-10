@@ -243,10 +243,10 @@ databaseChangeLog:
       author: vnebe
       changes:
         - createTable:
-            tableName: money
+            tableName: account
             columns:
               - column:
-                  name: money_id
+                  name: account_id
                   type: INT
                   autoIncrement: true
                   constraints:
@@ -261,19 +261,19 @@ databaseChangeLog:
       author: vnebe
       changes:
         - insert:
-            tableName: money
+            tableName: account
             columns:
               - column:
-                  name: money_id
+                  name: account_id
                   value: "1"
               - column:
                   name: amount
                   value: "25"
         - insert:
-            tableName: money
+            tableName: account
             columns:
               - column:
-                  name: money_id
+                  name: account_id
                   value: "2"
               - column:
                   name: amount
@@ -320,12 +320,12 @@ databaseChangeLog:
                     foreignKeyName: fk_user_tariff
                     references: tariff(tariff_id)
               - column:
-                  name: money_id
+                  name: account_id
                   type: INT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_user_money
-                    references: money(money_id)
+                    foreignKeyName: fk_user_account
+                    references: account(account_id)
 
   - changeSet:
       id: 10
@@ -354,7 +354,7 @@ databaseChangeLog:
                   name: tariff_id
                   value: "1"
               - column:
-                  name: money_id
+                  name: account_id
                   value: "1"
         - insert:
             tableName: user
@@ -378,7 +378,7 @@ databaseChangeLog:
                   name: tariff_id
                   value: "2"
               - column:
-                  name: money_id
+                  name: account_id
                   value: "2"
 
   - changeSet:

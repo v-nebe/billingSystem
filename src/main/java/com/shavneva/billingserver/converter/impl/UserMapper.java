@@ -1,6 +1,8 @@
 package com.shavneva.billingserver.converter.impl;
 
 import com.shavneva.billingserver.converter.IMapper;
+import com.shavneva.billingserver.dto.UserDto;
+import com.shavneva.billingserver.entities.User;
 import org.springframework.stereotype.Service;
 
 @Service

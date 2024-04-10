@@ -1,13 +1,10 @@
 package com.shavneva.billingserver.service;
 
 import com.shavneva.billingserver.exception.ResourceNotFoundException;
-import com.shavneva.billingserver.repository.UserRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class GenericService<T, ID> {
 
     private final JpaRepository<T, ID> repository;
