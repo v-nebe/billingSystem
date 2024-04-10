@@ -9,7 +9,7 @@ public interface ICrudService<E> {
 
     E create(E newE);
 
-    E update(E newEntity);
+    E update(E newEntity, int id);
 
    void delete(int id);
 }

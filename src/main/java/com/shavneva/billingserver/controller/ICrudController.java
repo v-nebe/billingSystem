@@ -22,7 +22,7 @@ public interface ICrudController<DTO> {
 
     //update
     @PutMapping("/update")
-    DTO update(@Valid @RequestBody DTO newDTO);
+    DTO update(@Valid @RequestBody DTO newDTO, @Valid @PathVariable int id);
 
     //delete
     @DeleteMapping("/delete/{id}")
