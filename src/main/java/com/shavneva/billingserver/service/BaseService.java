@@ -5,11 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public class GenericService<T, ID> {
+public class BaseService<T, ID> {
 
     private final JpaRepository<T, ID> repository;
 
-    public GenericService(JpaRepository<T, ID> repository) {
+    public BaseService(JpaRepository<T, ID> repository) {
         this.repository = repository;
     }
 
