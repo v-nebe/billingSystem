@@ -1,11 +1,12 @@
 package com.shavneva.billingserver.service;
 
+import com.shavneva.billingserver.entities.BaseEntity;
 import com.shavneva.billingserver.exception.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public class BaseService<T, ID> {
+public class BaseService<T extends BaseEntity<ID>, ID> {
 
     private final JpaRepository<T, ID> repository;
 
@@ -26,7 +27,8 @@ public class BaseService<T, ID> {
         return repository.save(entity);
     }
 
-    public T update(T updatedEntity, ID id) {
+    public T update(T updatedEntity) {
+        ID id =  updatedEntity.getId();
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Entity with id " + id + " not found");
         }

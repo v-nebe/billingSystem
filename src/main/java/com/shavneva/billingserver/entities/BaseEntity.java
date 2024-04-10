@@ -1,4 +1,5 @@
 package com.shavneva.billingserver.entities;
 
-public class BaseEntity {
+public abstract class BaseEntity<ID> {
+    public abstract ID getId();
 }

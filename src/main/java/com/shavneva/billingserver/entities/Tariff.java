@@ -15,7 +15,7 @@ import java.util.HashSet;
 @AllArgsConstructor
 @Entity
 @Table(name = "tariff")
-public class Tariff {
+public class Tariff extends BaseEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tariff_id")
@@ -33,4 +33,9 @@ public class Tariff {
             inverseJoinColumns = @JoinColumn(
                     name = "service_id"))
     private Collection<Services> services = new HashSet<>();
+
+    @Override
+    public Integer getId() {
+        return tariffId;
+    }
 }

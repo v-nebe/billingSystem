@@ -15,7 +15,7 @@ import java.util.HashSet;
 @AllArgsConstructor
 @Entity
 @Table(name = "services")
-public class Services {
+public class Services extends BaseEntity<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "service_id")
@@ -25,4 +25,9 @@ public class Services {
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "services")
     private Collection<Tariff> tariffs = new HashSet<>();
+
+    @Override
+    public Integer getId() {
+        return serviceId;
+    }
 }

@@ -48,9 +48,9 @@ public class UserController implements ICrudController<UserDto> {
 
     //update
     @PreAuthorize("#newDTO.email == authentication.principal.email or hasRole('ROLE_ADMIN')")
-    public UserDto update(UserDto newDTO, int id) {
+    public UserDto update(UserDto newDTO) {
         User updatedUser = userMapper.mapToEntity(newDTO);
-        userService.update(updatedUser, id);
+        userService.update(updatedUser);
         return userMapper.mapToDto(updatedUser);
     }
 

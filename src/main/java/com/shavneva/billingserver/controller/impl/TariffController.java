@@ -41,9 +41,9 @@ public class TariffController implements ICrudController<TariffDto> {
         );
     }
 
-    public TariffDto update(TariffDto newDTO, int id) {
+    public TariffDto update(TariffDto newDTO) {
         Tariff updatedTariff = tariffMapper.mapToEntity(newDTO);
-        tariffService.update(updatedTariff, id);
+        tariffService.update(updatedTariff);
         return tariffMapper.mapToDto(updatedTariff);
     }
 

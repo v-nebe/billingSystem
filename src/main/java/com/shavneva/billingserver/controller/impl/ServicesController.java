@@ -40,9 +40,9 @@ public class ServicesController implements ICrudController<ServiceDto> {
         );
     }
 
-    public ServiceDto update(ServiceDto newDTO, int id) {
+    public ServiceDto update(ServiceDto newDTO) {
         Services updatedService = servicesMapper.mapToEntity(newDTO);
-        servicesService.update(updatedService, id);
+        servicesService.update(updatedService);
         return servicesMapper.mapToDto(updatedService);
     }
 
