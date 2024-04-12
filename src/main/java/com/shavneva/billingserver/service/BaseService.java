@@ -1,6 +1,5 @@
 package com.shavneva.billingserver.service;
 
-import com.shavneva.billingserver.controller.ICrudController;
 import com.shavneva.billingserver.entities.BaseEntity;
 import com.shavneva.billingserver.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
