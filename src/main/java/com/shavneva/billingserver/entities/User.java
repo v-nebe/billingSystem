@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "user")
-public class User extends BaseEntity<Integer> implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")

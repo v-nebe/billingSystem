@@ -1,5 +1,6 @@
 package com.shavneva.billingserver.service;
 
+
 import com.shavneva.billingserver.entities.BaseEntity;
 import com.shavneva.billingserver.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public class BaseService<T extends BaseEntity<ID>, ID> implements ICrudService<T>{
+public class BaseService<T extends BaseEntity, ID> implements ICrudService<T>{
 
-    private final JpaRepository<T, ID> repository;
+    private final JpaRepository<T, Integer> repository;
 
     @Autowired
-    public BaseService(JpaRepository<T, ID> repository) {
+    public BaseService(JpaRepository<T, Integer> repository) {
         this.repository = repository;
     }
 
@@ -21,7 +22,7 @@ public class BaseService<T extends BaseEntity<ID>, ID> implements ICrudService<T
     }
 
 
-    public T getById(ID id) {
+    public T getById(int id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Entity with id " + id + " not found"));
     }
@@ -31,14 +32,14 @@ public class BaseService<T extends BaseEntity<ID>, ID> implements ICrudService<T
     }
 
     public T update(T updatedEntity) {
-        ID id =  updatedEntity.getId();
+        int id =  updatedEntity.getId();
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Entity with id " + id + " not found");
         }
         return repository.save(updatedEntity);
     }
 
-    public void delete(ID id) {
+    public void delete(int id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Entity with id " + id + " not found");
         }

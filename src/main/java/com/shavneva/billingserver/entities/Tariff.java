@@ -15,7 +15,7 @@ import java.util.HashSet;
 @AllArgsConstructor
 @Entity
 @Table(name = "tariff")
-public class Tariff extends BaseEntity<Integer> {
+public class Tariff extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tariff_id")

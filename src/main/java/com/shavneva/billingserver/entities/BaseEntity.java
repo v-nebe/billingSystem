@@ -4,16 +4,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-public abstract class BaseEntity<ID> {
-    private ID id;
+public abstract class BaseEntity {
+    private Integer id;
 
     // Геттеры и сеттеры для id
 
-    public ID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(ID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
