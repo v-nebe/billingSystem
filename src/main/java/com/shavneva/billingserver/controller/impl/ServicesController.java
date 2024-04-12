@@ -27,26 +27,26 @@ public class ServicesController extends BaseController<Services, ServiceDto> {
     }
 
     @Override
-    //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-    //@PostFilter("hasRole('ROLE_ADMIN') or filterObject.email == authentication.name")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@PostFilter("hasRole('ROLE_ADMIN')")
     public List<ServiceDto> getAll() {
         return super.getAll();
     }
 
     @Override
-    //@PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public ServiceDto getById(int id) {
         return super.getById(id);
     }
 
     @Override
-    //@PreAuthorize("#newDTO.email == authentication.principal.email or hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public ServiceDto update(ServiceDto newDTO) {
         return super.update(newDTO);
     }
 
     @Override
-    //@PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public void delete(int id) {
         super.delete(id);
     }
