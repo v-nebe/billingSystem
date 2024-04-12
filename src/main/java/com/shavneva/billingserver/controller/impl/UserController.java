@@ -1,6 +1,6 @@
 package com.shavneva.billingserver.controller.impl;
 
-import com.shavneva.billingserver.controller.ICrudController;
+import com.shavneva.billingserver.controller.BaseController;
 import com.shavneva.billingserver.converter.impl.UserMapper;
 import com.shavneva.billingserver.dto.UserDto;
 import com.shavneva.billingserver.entities.User;
@@ -14,50 +14,41 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class UserController implements ICrudController<UserDto> {
-    private final UserService userService;
-    private final UserMapper userMapper;
+public class UserController extends BaseController<User, UserDto> {
 
     @Autowired
     public UserController(UserService userService, UserMapper userMapper) {
-        this.userService = userService;
-        this.userMapper = userMapper;
-
+        super(userService, userMapper);
     }
-
-    //create
+    @Override
     @PreAuthorize("permitAll()")
     public UserDto create(UserDto userDto) {
-        User newUser = userMapper.mapToEntity(userDto);
-        User createdUser = userService.create(newUser);
-        return userMapper.mapToDto(createdUser);
+        return super.create(userDto);
     }
 
-    //read
+    @Override
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @PostFilter("hasRole('ROLE_ADMIN') or filterObject.email == authentication.name")
     public List<UserDto> getAll() {
-        return userMapper.mapAll(userService.getAll());
+        return super.getAll();
     }
+
+    @Override
     @PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
     public UserDto getById(int id) {
-        return userMapper.mapToDto(
-                userService.getById(id)
-        );
+        return super.getById(id);
     }
 
-    //update
+    @Override
     @PreAuthorize("#newDTO.email == authentication.principal.email or hasRole('ROLE_ADMIN')")
     public UserDto update(UserDto newDTO) {
-        User updatedUser = userMapper.mapToEntity(newDTO);
-        userService.update(updatedUser);
-        return userMapper.mapToDto(updatedUser);
+        return super.update(newDTO);
     }
 
-    //delete
+    @Override
     @PreAuthorize("principal.userId == #id or hasRole('ROLE_ADMIN')")
     public void delete(int id) {
-        userService.delete(id);
+        super.delete(id);
     }
 
 }
