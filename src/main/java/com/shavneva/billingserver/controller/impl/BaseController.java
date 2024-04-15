@@ -1,5 +1,6 @@
-package com.shavneva.billingserver.controller;
+package com.shavneva.billingserver.controller.impl;
 
+import com.shavneva.billingserver.controller.ICrudController;
 import com.shavneva.billingserver.converter.IMapper;
 import com.shavneva.billingserver.service.ICrudService;
 import org.springframework.beans.factory.annotation.Autowired;

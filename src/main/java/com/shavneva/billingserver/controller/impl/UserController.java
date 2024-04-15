@@ -1,6 +1,5 @@
 package com.shavneva.billingserver.controller.impl;
 
-import com.shavneva.billingserver.controller.BaseController;
 import com.shavneva.billingserver.converter.impl.UserMapper;
 import com.shavneva.billingserver.dto.UserDto;
 import com.shavneva.billingserver.entities.User;

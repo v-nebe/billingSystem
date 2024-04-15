@@ -2,7 +2,6 @@ package com.shavneva.billingserver.service.impl;
 
 import com.shavneva.billingserver.entities.Tariff;
 import com.shavneva.billingserver.repository.TariffRepository;
-import com.shavneva.billingserver.service.BaseService;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,27 +1,28 @@
-package com.shavneva.billingserver.controller;
+package com.shavneva.billingserver.controller.impl;
 
+import com.shavneva.billingserver.controller.IBillingController;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.ResourceNotFoundException;
 import com.shavneva.billingserver.repository.UserRepository;
-import com.shavneva.billingserver.service.BillingService;
+import com.shavneva.billingserver.service.impl.BillingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/billing")
-public class BillingController {
+public class BillingController implements IBillingController {
     @Autowired
     private BillingService billingService;
     private UserRepository userRepository;
-    @PostMapping("/bill/{userId}")
-    public void billForServices(@PathVariable Integer userId, @RequestParam double amount) {
+    @Override
+    public void billForServices(Integer userId, double amount) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
         billingService.billForServices(user, amount);
     }
 
-    @PostMapping("/deposit/{userId}")
-    public void depositMoney(@PathVariable Integer userId, @RequestParam double amount) {
+    @Override
+    public void depositMoney(Integer userId, double amount) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
         billingService.depositMoney(user, amount);

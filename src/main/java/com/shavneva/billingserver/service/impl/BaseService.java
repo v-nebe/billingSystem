@@ -1,14 +1,15 @@
-package com.shavneva.billingserver.service;
+package com.shavneva.billingserver.service.impl;
 
 
 import com.shavneva.billingserver.entities.BaseEntity;
 import com.shavneva.billingserver.exception.ResourceNotFoundException;
+import com.shavneva.billingserver.service.ICrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public class BaseService<T extends BaseEntity, ID> implements ICrudService<T>{
+public class BaseService<T extends BaseEntity, ID> implements ICrudService<T> {
 
     private final JpaRepository<T, Integer> repository;
 

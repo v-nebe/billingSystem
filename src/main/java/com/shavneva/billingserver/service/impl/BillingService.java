@@ -1,19 +1,21 @@
-package com.shavneva.billingserver.service;
+package com.shavneva.billingserver.service.impl;
 
 import com.shavneva.billingserver.entities.Account;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.InsufficientFundsException;
 import com.shavneva.billingserver.exception.MoneyNotFoundException;
 import com.shavneva.billingserver.repository.AccountRepository;
+import com.shavneva.billingserver.service.IBillingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BillingService {
+public class BillingService implements IBillingService<User> {
 
     @Autowired
     private AccountRepository accountRepository;
 
+    @Override
     public void billForServices(User user, double amount) {
         Account account = user.getAccount();
         if (account == null) {
@@ -29,6 +31,7 @@ public class BillingService {
         accountRepository.save(account);
     }
 
+    @Override
     public void depositMoney(User user, double amount) {
         Account account = user.getAccount();
         if (account == null) {
