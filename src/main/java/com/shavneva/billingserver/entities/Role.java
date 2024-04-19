@@ -18,6 +18,4 @@ public class Role {
     private String roleName;
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
     private Collection<User> users = new HashSet<>();
-
-
 }

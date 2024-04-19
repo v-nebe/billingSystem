@@ -2,8 +2,10 @@ package com.shavneva.billingserver.service;
 
 import com.shavneva.billingserver.entities.User;
 
-public interface IBillingService<E> {
-    void billForServices(E e, double amount);
+import java.math.BigDecimal;
 
-    void depositMoney(E e, double amount);
+public interface IBillingService<E> {
+    void billForServices(E e, BigDecimal amount);
+
+    void depositMoney(E e, BigDecimal amount);
 }

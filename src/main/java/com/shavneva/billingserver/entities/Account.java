@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
 
+import java.math.BigDecimal;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -19,7 +21,7 @@ public class Account {
     @Column(name = "money_id")
     private Integer moneyId;
     @Column(name = "amount")
-    private double amount;
+    private BigDecimal amount;
 
     @OneToOne
     @JoinColumn(name = "user_id")

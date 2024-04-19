@@ -8,6 +8,8 @@ import com.shavneva.billingserver.service.impl.BillingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/billing")
 public class BillingController implements IBillingController {
@@ -15,14 +17,14 @@ public class BillingController implements IBillingController {
     private BillingService billingService;
     private UserRepository userRepository;
     @Override
-    public void billForServices(Integer userId, double amount) {
+    public void billForServices(Integer userId, BigDecimal amount) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
         billingService.billForServices(user, amount);
     }
 
     @Override
-    public void depositMoney(Integer userId, double amount) {
+    public void depositMoney(Integer userId, BigDecimal amount) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
         billingService.depositMoney(user, amount);
