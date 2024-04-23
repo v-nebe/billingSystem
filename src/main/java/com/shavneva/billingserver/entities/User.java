@@ -43,8 +43,13 @@ public class User extends BaseEntity implements UserDetails {
                     name = "role_id"))
     private Collection<Role> roles= new HashSet<>();
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
     private Account account;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tariff_id")
+    private Tariff tariff;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -23,8 +23,6 @@ public class Account {
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "account")
     private User user;
-
 }

@@ -34,6 +34,9 @@ public class Tariff extends BaseEntity{
                     name = "service_id"))
     private Collection<Services> services = new HashSet<>();
 
+    @OneToOne(mappedBy = "tariff")
+    private User user;
+
     @Override
     public Integer getId() {
         return tariffId;

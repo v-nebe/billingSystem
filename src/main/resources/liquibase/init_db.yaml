@@ -316,14 +316,14 @@ databaseChangeLog:
                   name: tariff_id
                   type: INT
                   constraints:
-                    nullable: false
+                    nullable: true
                     foreignKeyName: fk_user_tariff
                     references: tariff(tariff_id)
               - column:
                   name: account_id
                   type: INT
                   constraints:
-                    nullable: false
+                    nullable: true
                     foreignKeyName: fk_user_account
                     references: account(account_id)
 
