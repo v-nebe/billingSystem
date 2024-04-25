@@ -1,10 +1,7 @@
 package com.shavneva.billingserver.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
@@ -23,6 +20,7 @@ public class Account {
     @Column(name = "amount")
     private BigDecimal amount;
 
+    @ToString.Exclude
     @OneToOne(mappedBy = "account")
     private User user;
 }

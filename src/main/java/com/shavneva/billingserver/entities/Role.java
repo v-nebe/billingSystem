@@ -16,6 +16,8 @@ public class Role {
     @Getter
     @Column(name = "role_name")
     private String roleName;
+
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
     private Collection<User> users = new HashSet<>();
 }

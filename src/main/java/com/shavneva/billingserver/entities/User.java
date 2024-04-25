@@ -43,11 +43,11 @@ public class User extends BaseEntity implements UserDetails {
                     name = "role_id"))
     private Collection<Role> roles= new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tariff_id")
     private Tariff tariff;
 

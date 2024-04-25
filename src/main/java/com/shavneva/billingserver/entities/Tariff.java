@@ -1,13 +1,11 @@
 package com.shavneva.billingserver.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Collection;
 import java.util.HashSet;
+
 
 @Builder
 @Data
@@ -34,6 +32,7 @@ public class Tariff extends BaseEntity{
                     name = "service_id"))
     private Collection<Services> services = new HashSet<>();
 
+    @ToString.Exclude
     @OneToOne(mappedBy = "tariff")
     private User user;
 
