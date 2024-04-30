@@ -9,13 +9,10 @@ import java.math.BigDecimal;
 public class NotificationService {
 
     private final EmailNotificationService emailNotificationService;
-    private final SmsNotificationService smsNotificationService;
 
     @Autowired
-    public NotificationService(EmailNotificationService emailNotificationService,
-                               SmsNotificationService smsNotificationService) {
+    public NotificationService(EmailNotificationService emailNotificationService) {
         this.emailNotificationService = emailNotificationService;
-        this.smsNotificationService = smsNotificationService;
     }
 
     public void notifyUserAboutBalance(String userEmail, BigDecimal balance) {
