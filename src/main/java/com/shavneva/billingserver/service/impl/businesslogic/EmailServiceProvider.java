@@ -1,4 +1,4 @@
-package com.shavneva.billingserver.service.impl;
+package com.shavneva.billingserver.service.impl.businesslogic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -6,12 +6,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailNotificationService {
+public class EmailServiceProvider {
 
     private final JavaMailSender emailSender;
 
     @Autowired
-    public EmailNotificationService(JavaMailSender emailSender) {
+    public EmailServiceProvider(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
 

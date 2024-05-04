@@ -4,7 +4,7 @@ import com.shavneva.billingserver.controller.IBillingController;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.ResourceNotFoundException;
 import com.shavneva.billingserver.repository.UserRepository;
-import com.shavneva.billingserver.service.impl.BillingService;
+import com.shavneva.billingserver.service.impl.businesslogic.BillingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

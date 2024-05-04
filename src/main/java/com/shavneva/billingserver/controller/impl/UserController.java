@@ -20,7 +20,6 @@ public class UserController extends BaseController<User, UserDto> {
         super(userService, userMapper);
     }
     @Override
-    @PreAuthorize("permitAll()")
     public UserDto create(UserDto userDto) {
         return super.create(userDto);
     }

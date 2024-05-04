@@ -28,6 +28,8 @@ public class SecurityConfig {
                 .disable()
                 .httpBasic(basic -> basic.securityContextRepository(new HttpSessionSecurityContextRepository()))
                 .authorizeRequests()
+                .requestMatchers("/api/user/create")
+                .anonymous()
                 .requestMatchers("/api/**")
                 .fullyAuthenticated()
                 .requestMatchers("/**")

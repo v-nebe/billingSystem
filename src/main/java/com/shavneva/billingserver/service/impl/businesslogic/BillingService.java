@@ -1,15 +1,13 @@
-package com.shavneva.billingserver.service.impl;
+package com.shavneva.billingserver.service.impl.businesslogic;
 
 import com.shavneva.billingserver.entities.Account;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.InsufficientFundsException;
 import com.shavneva.billingserver.exception.MoneyNotFoundException;
-import com.shavneva.billingserver.exception.ResourceNotFoundException;
 import com.shavneva.billingserver.repository.AccountRepository;
 import com.shavneva.billingserver.service.IBillingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -18,7 +16,10 @@ public class BillingService implements IBillingService<User> {
 
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private NotificationService notificationService;
 
+    //выставить счет пользователю и снять деньги за предоставленные услуги
     @Override
     public void billForServices(User user, BigDecimal amount) {
         Account account = user.getAccount();
@@ -33,8 +34,12 @@ public class BillingService implements IBillingService<User> {
 
         account.setAmount(currentAmount.subtract(amount));
         accountRepository.save(account);
+
+        // Уведомление пользователя о списании средств
+        notificationService.notifyUserAboutBalance(user.getEmail(), account.getAmount(), user.getNumber());
     }
 
+    //выполняет пополнение счета для пользователя
     @Override
     public void depositMoney(User user, BigDecimal amount) {
         Account account = user.getAccount();
@@ -46,16 +51,8 @@ public class BillingService implements IBillingService<User> {
 
         account.setAmount(account.getAmount().add(amount));
         accountRepository.save(account);
-    }
 
-    @Transactional
-    public void deposit(Long userId, BigDecimal amount) {
-        Account account = accountRepository.findByUserId(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Account not found for user: " + userId));
-
-        BigDecimal newBalance = account.getAmount().add(amount);
-        account.setAmount(newBalance);
-
-        accountRepository.save(account);
+        // Уведомление пользователя о пополнении счета
+        notificationService.notifyUserAboutDeposit(user.getEmail(), amount, user.getNumber());
     }
 }
