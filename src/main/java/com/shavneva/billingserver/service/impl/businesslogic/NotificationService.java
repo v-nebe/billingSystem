@@ -20,7 +20,7 @@ public class NotificationService implements INotificationService {
 
     @Override
     public void notifyUserAboutBalance(String userEmail, BigDecimal balance, String phoneNumber) {
-        boolean choose = false;
+        boolean choose = true;
         String subject = "Уведомление о балансе";
         String message = "На вашем счете осталось: " + balance.toString();
         if(choose == true){
@@ -32,7 +32,7 @@ public class NotificationService implements INotificationService {
 
     @Override
     public void notifyUserAboutDeposit(String userEmail, BigDecimal amount, String phoneNumber) {
-        boolean choose = false;
+        boolean choose = true;
         String subject = "Уведомление о пополнении счета";
         String message = "Ваш счет был пополнен на сумму: " + amount.toString();
         if(choose == true){

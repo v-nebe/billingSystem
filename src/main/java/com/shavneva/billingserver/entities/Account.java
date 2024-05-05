@@ -15,8 +15,8 @@ import java.math.BigDecimal;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "money_id")
-    private Integer moneyId;
+    @Column(name = " account_id")
+    private Integer accountId;
     @Column(name = "amount")
     private BigDecimal amount;
 

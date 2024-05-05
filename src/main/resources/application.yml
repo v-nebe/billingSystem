@@ -17,16 +17,16 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   mail:
-    host: localhostMailHog
+    host: localhost
     port: 1025
-    username: katya.shauniova@gmail.com
-    password: vnebe1604
+    username:
+    password:
     properties:
       mail:
         smtp:
-          auth: true
+          auth: false
           starttls:
-            enable: true
+            enable: false
   jpa:
     generate-ddl: true
     hibernate:
@@ -40,3 +40,8 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.xml
     enabled: true
+
+
+my:
+  cron:
+    expression: 0 */1 * * * ?
