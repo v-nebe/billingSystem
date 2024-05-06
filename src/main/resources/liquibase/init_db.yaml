@@ -4,173 +4,6 @@ databaseChangeLog:
       author: vnebe
       changes:
         - createTable:
-            tableName: user
-            columns:
-              - column:
-                  name: user_id
-                  type: INT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: first_name
-                  type: varchar(100)
-              - column:
-                  name: last_name
-                  type: varchar(100)
-              - column:
-                  name: email
-                  type: varchar(100)
-              - column:
-                  name: number
-                  type: varchar(100)
-                  constraints:
-                    unique: true
-                    nullable: false
-              - column:
-                  name: password
-                  type: varchar(100)
-                  constraints:
-                    nullable: false
-  - changeSet:
-      id: 2
-      author: vnebe
-      comment: "Create admin user"
-      changes:
-        - insert:
-            tableName: user
-            columns:
-              - column:
-                  name: first_name
-                  value: "admin"
-              - column:
-                  name: last_name
-                  value: "admin"
-              - column:
-                  name: email
-                  value: "admin@gmail.com"
-              - column:
-                  name: number
-                  value: "+375290000000"
-              - column:
-                  name: password
-                  value: "admin"
-        - insert:
-            tableName: user
-            columns:
-              - column:
-                  name: first_name
-                  value: "guest"
-              - column:
-                  name: last_name
-                  value: "guest"
-              - column:
-                  name: email
-                  value: "guest@gmail.com"
-              - column:
-                  name: number
-                  value: "+375290000001"
-              - column:
-                  name: password
-                  value: "guest"
-
-  - changeSet:
-      id: 3
-      author: vnebe
-      changes:
-        - createTable:
-            tableName: role
-            columns:
-              - column:
-                  name: role_id
-                  type: INT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: role_name
-                  type: varchar(100)
-  - changeSet:
-      id: 4
-      author: vnebe
-      changes:
-        - insert:
-            tableName: role
-            columns:
-              - column:
-                  name: role_name
-                  value: "Админ"
-        - insert:
-            tableName: role
-            columns:
-              - column:
-                  name: role_name
-                  value: "Пользователь"
-        - insert:
-            tableName: role
-            columns:
-              - column:
-                  name: role_name
-                  value: "Бухгалтер"
-
-  - changeSet:
-      id: 5
-      author: vnebe
-      changes:
-        - createTable:
-            tableName: user_roles
-            columns:
-              - column:
-                  name: user_roles_id
-                  type: INT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: user_id
-                  type: INT
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_user_roles
-                    references: user(user_id)
-              - column:
-                  name: role_id
-                  type: INT
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_role_users
-                    references: role(role_id)
-  - changeSet:
-      id: 6
-      author: vnebe
-      changes:
-        - insert:
-            tableName: user_roles
-            columns:
-              - column:
-                  name: user_id
-                  value: "1"
-              - column:
-                  name: role_id
-                  value: "1"
-        - insert:
-            tableName: user_roles
-            columns:
-              - column:
-                  name: user_id
-                  value: "2"
-              - column:
-                  name: role_id
-                  value: "2"
-
-  - changeSet:
-      id: 7
-      author: vnebe
-      changes:
-        - createTable:
             tableName: tariff
             columns:
               - column:
@@ -187,7 +20,7 @@ databaseChangeLog:
                   name: price
                   type: MONEY
   - changeSet:
-      id: 8
+      id: 2
       author: vnebe
       changes:
         - insert:
@@ -219,7 +52,7 @@ databaseChangeLog:
                   value: "15"
 
   - changeSet:
-      id: 9
+      id: 3
       author: vnebe
       changes:
         - createTable:
@@ -236,7 +69,7 @@ databaseChangeLog:
                   name: service
                   type: varchar(100)
   - changeSet:
-      id: 10
+      id: 4
       author: vnebe
       changes:
         - insert:
@@ -283,7 +116,7 @@ databaseChangeLog:
                   value: "20 гб с накоплением интернет-трафика"
 
   - changeSet:
-      id: 11
+      id: 5
       author: vnebe
       changes:
         - createTable:
@@ -311,7 +144,7 @@ databaseChangeLog:
                     foreignKeyName: fk_s_tariff
                     references: services(service_id)
   - changeSet:
-      id: 12
+      id: 6
       author: vnebe
       changes:
         - insert:
@@ -406,14 +239,197 @@ databaseChangeLog:
                   value: "5"
 
   - changeSet:
+      id: 7
+      author: vnebe
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: account_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: amount
+                  type: MONEY
+
+  - changeSet:
+      id: 8
+      author: vnebe
+      changes:
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: account_id
+                  value: "1"
+              - column:
+                  name: amount
+                  value: "25"
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: account_id
+                  value: "2"
+              - column:
+                  name: amount
+                  value: "30"
+  - changeSet:
+      id: 9
+      author: vnebe
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: user_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(100)
+              - column:
+                  name: last_name
+                  type: varchar(100)
+              - column:
+                  name: email
+                  type: varchar(100)
+              - column:
+                  name: number
+                  type: varchar(100)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tariff_id
+                  type: INT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_tariff
+                    references: tariff(tariff_id)
+              - column:
+                  name: account_id
+                  type: INT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_account
+                    references: account(account_id)
+
+  - changeSet:
+      id: 10
+      author: vnebe
+      comment: "Create admin user"
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: first_name
+                  value: "admin"
+              - column:
+                  name: last_name
+                  value: "admin"
+              - column:
+                  name: email
+                  value: "admin@gmail.com"
+              - column:
+                  name: number
+                  value: "+375290000000"
+              - column:
+                  name: password
+                  value: "admin"
+              - column:
+                  name: tariff_id
+                  value: "1"
+              - column:
+                  name: account_id
+                  value: "1"
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: first_name
+                  value: "guest"
+              - column:
+                  name: last_name
+                  value: "guest"
+              - column:
+                  name: email
+                  value: "guest@gmail.com"
+              - column:
+                  name: number
+                  value: "+375290000001"
+              - column:
+                  name: password
+                  value: "guest"
+              - column:
+                  name: tariff_id
+                  value: "2"
+              - column:
+                  name: account_id
+                  value: "2"
+
+  - changeSet:
+      id: 11
+      author: vnebe
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: role_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role_name
+                  type: varchar(100)
+  - changeSet:
+      id: 12
+      author: vnebe
+      changes:
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role_name
+                  value: "Админ"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role_name
+                  value: "Пользователь"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role_name
+                  value: "Бухгалтер"
+
+  - changeSet:
       id: 13
       author: vnebe
       changes:
         - createTable:
-            tableName: subscriber
+            tableName: user_roles
             columns:
               - column:
-                  name: subscriber_id
+                  name: user_roles_id
                   type: INT
                   autoIncrement: true
                   constraints:
@@ -424,47 +440,37 @@ databaseChangeLog:
                   type: INT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_subr_user
+                    foreignKeyName: fk_user_roles
                     references: user(user_id)
               - column:
-                  name: tariff_id
+                  name: role_id
                   type: INT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_sub_tariff
-                    references: tariff(tariff_id)
-              - column:
-                  name: amount
-                  type: MONEY
-
+                    foreignKeyName: fk_role_users
+                    references: role(role_id)
   - changeSet:
       id: 14
       author: vnebe
       changes:
         - insert:
-            tableName: subscriber
+            tableName: user_roles
             columns:
               - column:
                   name: user_id
                   value: "1"
               - column:
-                  name: tariff_id
+                  name: role_id
                   value: "1"
-              - column:
-                  name: amount
-                  value: "25"
         - insert:
-            tableName: subscriber
+            tableName: user_roles
             columns:
               - column:
                   name: user_id
                   value: "2"
               - column:
-                  name: tariff_id
-                  value: "3"
-              - column:
-                  name: amount
-                  value: "30"
+                  name: role_id
+                  value: "2"
 
   -  changeSet:
        id:  15

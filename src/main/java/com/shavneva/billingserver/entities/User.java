@@ -18,9 +18,9 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "user")
-public class User  implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Integer userId;
     @Column(name = "first_name")
@@ -42,6 +42,9 @@ public class User  implements UserDetails {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id"))
     private Collection<Role> roles= new HashSet<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Account account;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -72,5 +75,10 @@ public class User  implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public Integer getId() {
+        return userId;
     }
 }

@@ -7,9 +7,9 @@ public interface ICrudService<E> {
 
     E getById(int id);
 
-    E create(E user);
+    E create(E newE);
 
     E update(E newEntity);
 
-    String delete(int id);
+   void delete(int id);
 }

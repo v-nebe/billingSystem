@@ -1,5 +1,4 @@
 package com.shavneva.billingserver.dto;
-import com.shavneva.billingserver.entities.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

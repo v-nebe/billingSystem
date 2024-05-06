@@ -10,7 +10,7 @@ import java.util.HashSet;
 @Table(name = "role")
 public class Role {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
     private Long roleId;
     @Getter
@@ -18,6 +18,4 @@ public class Role {
     private String roleName;
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
     private Collection<User> users = new HashSet<>();
-
-
 }
