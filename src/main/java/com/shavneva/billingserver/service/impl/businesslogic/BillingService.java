@@ -49,6 +49,7 @@ public class BillingService implements IBillingService<User> {
             account = new Account();
             account.setUser(user);
             account.setAmount(BigDecimal.ZERO);
+
         }
 
         account.setAmount(account.getAmount().add(amount));
