@@ -3,6 +3,7 @@ package com.shavneva.billingserver.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -21,7 +22,7 @@ public class Tariff extends BaseEntity{
     @Column(name = "tariff_name")
     private String tariffName;
     @Column(name = "price")
-    private String price;
+    private BigDecimal price;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
