@@ -41,12 +41,6 @@ public class BillingService implements IBillingService<User> {
         notificationService.notifyUserAboutBalance(user.getEmail(), account.getAmount(), user.getNumber());
     }
 
-/*    @Scheduled(cron="${my.cron.expression: 0 0 0 L * *}")
-    public void periodicalWithdrawingMoney() {
-        billForServices(User , BigDecimal tariffCost)
-        notificationService.notifyUserAboutBalance("adfad@sadfsa.com", BigDecimal.valueOf(13412341), "+375123412342");
-    }*/
-
     //выполняет пополнение счета для пользователя
     @Override
     public void depositMoney(User user, BigDecimal amount) {
