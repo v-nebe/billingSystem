@@ -277,7 +277,7 @@ databaseChangeLog:
                   value: "2"
               - column:
                   name: amount
-                  value: "10000"
+                  value: "1000"
   - changeSet:
       id: 9
       author: vnebe
