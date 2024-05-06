@@ -1,10 +1,7 @@
 package com.shavneva.billingserver.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
@@ -18,13 +15,12 @@ import java.math.BigDecimal;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "money_id")
-    private Integer moneyId;
+    @Column(name = " account_id")
+    private Integer accountId;
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @ToString.Exclude
+    @OneToOne(mappedBy = "account")
     private User user;
-
 }
