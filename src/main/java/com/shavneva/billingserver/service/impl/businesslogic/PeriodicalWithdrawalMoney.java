@@ -3,6 +3,7 @@ package com.shavneva.billingserver.service.impl.businesslogic;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.InsufficientFundsException;
 import com.shavneva.billingserver.exception.MoneyNotFoundException;
+import com.shavneva.billingserver.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -14,11 +15,13 @@ import java.util.List;
 public class PeriodicalWithdrawalMoney {
     @Autowired
     private BillingService billingService;
+    @Autowired
+    private UserService userService;
 
     @Scheduled(cron = "${my.cron.expression:0 0 0 L * *}")
     public void performPeriodicalWithdrawal() {
 
-        List<User> userList = getAllUsers();
+        List<User> userList = userService.getAll();
 
         for (User user : userList) {
             BigDecimal tariffCost = getTariffCostForUser(user);
@@ -28,11 +31,6 @@ public class PeriodicalWithdrawalMoney {
 
             }
         }
-    }
-
-    // Метод для получения списка всех пользователей
-    private List<User> getAllUsers() {
-
     }
 
     // Метод для получения стоимости тарифа для каждого пользователя
