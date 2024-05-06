@@ -19,7 +19,7 @@ public class PeriodicalWithdrawalMoney {
     private UserService userService;
 
     @Scheduled(cron = "${my.cron.expression:0 0 0 L * *}")
-    public void performPeriodicalWithdrawal() {
+    public void periodicalWithdrawingMoney() {
 
         List<User> userList = userService.getAll();
 
@@ -33,7 +33,6 @@ public class PeriodicalWithdrawalMoney {
         }
     }
 
-    // Метод для получения стоимости тарифа для каждого пользователя
     private BigDecimal getTariffCostForUser(User user) {
 
     }

@@ -8,7 +8,6 @@ import com.shavneva.billingserver.repository.AccountRepository;
 import com.shavneva.billingserver.service.IBillingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
