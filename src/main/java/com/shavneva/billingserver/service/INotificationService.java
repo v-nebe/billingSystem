@@ -6,4 +6,5 @@ public interface INotificationService {
     void notifyUserAboutBalance(String userEmail, BigDecimal balance, String phoneNumber);
 
     void notifyUserAboutDeposit(String userEmail, BigDecimal amount, String phoneNumber);
+    void notifyUserInsufficientFunds(String userEmail, String phoneNumber);
 }

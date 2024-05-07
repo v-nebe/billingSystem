@@ -46,4 +46,15 @@ public class NotificationService implements INotificationService {
             iSmsServiceProvider.sendSms(phoneNumber, message);
         }
     }
+
+    @Override
+    public void notifyUserInsufficientFunds(String userEmail, String phoneNumber) {
+        String subject = "Уведомление о недостатке средств";
+        String message = "На вашем счете недостаточно средств для выполнения операции";
+        if (choose) {
+            IEmailServiceProvider.sendNotification(userEmail, subject, message);
+        } else {
+            iSmsServiceProvider.sendSms(phoneNumber, message);
+        }
+    }
 }

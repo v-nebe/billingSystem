@@ -36,6 +36,7 @@ public class BillingService implements IBillingService<User> {
 
         BigDecimal currentAmount = account.getAmount();
         if (currentAmount.compareTo(tariffCost) < 0) {
+            InotificationService.notifyUserInsufficientFunds(user.getEmail(), user.getNumber());
             throw new InsufficientFundsException("Insufficient funds to pay for services");
         }
 
