@@ -7,6 +7,7 @@ import com.shavneva.billingserver.exception.MoneyNotFoundException;
 import com.shavneva.billingserver.repository.AccountRepository;
 import com.shavneva.billingserver.service.IBillingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,14 @@ import java.math.BigDecimal;
 @EnableScheduling
 public class BillingService implements IBillingService<User> {
 
-    @Autowired
     private AccountRepository accountRepository;
-    @Autowired
     private NotificationService notificationService;
+
+    @Autowired
+    public BillingService(AccountRepository accountRepository, NotificationService notificationService) {
+        this.accountRepository = accountRepository;
+        this.notificationService = notificationService;
+    }
 
     //выставить счет пользователю и снять деньги за предоставленные услуги
     @Override
