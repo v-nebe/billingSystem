@@ -6,8 +6,8 @@ import com.shavneva.billingserver.exception.InsufficientFundsException;
 import com.shavneva.billingserver.exception.MoneyNotFoundException;
 import com.shavneva.billingserver.repository.AccountRepository;
 import com.shavneva.billingserver.service.IBillingService;
+import com.shavneva.billingserver.service.INotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +17,13 @@ import java.math.BigDecimal;
 @EnableScheduling
 public class BillingService implements IBillingService<User> {
 
-    private AccountRepository accountRepository;
-    private NotificationService notificationService;
+    private final AccountRepository accountRepository;
+    private final INotificationService InotificationService;
 
     @Autowired
-    public BillingService(AccountRepository accountRepository, NotificationService notificationService) {
+    public BillingService(AccountRepository accountRepository, NotificationService InotificationService) {
         this.accountRepository = accountRepository;
-        this.notificationService = notificationService;
+        this.InotificationService = InotificationService;
     }
 
     //выставить счет пользователю и снять деньги за предоставленные услуги
@@ -43,7 +43,7 @@ public class BillingService implements IBillingService<User> {
         accountRepository.save(account);
 
         // Уведомление пользователя о списании средств
-        notificationService.notifyUserAboutBalance(user.getEmail(), account.getAmount(), user.getNumber());
+        InotificationService.notifyUserAboutBalance(user.getEmail(), account.getAmount(), user.getNumber());
     }
 
     //выполняет пополнение счета для пользователя
@@ -61,6 +61,6 @@ public class BillingService implements IBillingService<User> {
         accountRepository.save(account);
 
         // Уведомление пользователя о пополнении счета
-        notificationService.notifyUserAboutDeposit(user.getEmail(), amount, user.getNumber());
+        InotificationService.notifyUserAboutDeposit(user.getEmail(), amount, user.getNumber());
     }
 }

@@ -4,6 +4,7 @@ import com.shavneva.billingserver.entities.Tariff;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.InsufficientFundsException;
 import com.shavneva.billingserver.exception.MoneyNotFoundException;
+import com.shavneva.billingserver.service.IBillingService;
 import com.shavneva.billingserver.service.impl.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +18,13 @@ import java.util.List;
 @Component
 public class PeriodicalWithdrawalMoney {
 
-    private final BillingService billingService;
+    private final IBillingService<User> iBillingService;
     private final UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(Logger.class);
 
     @Autowired
-    public PeriodicalWithdrawalMoney(BillingService billingService, UserService userService) {
-        this.billingService = billingService;
+    public PeriodicalWithdrawalMoney(IBillingService<User> iBillingService, UserService userService) {
+        this.iBillingService = iBillingService;
         this.userService = userService;
     }
 
@@ -35,7 +36,7 @@ public class PeriodicalWithdrawalMoney {
         for (User user : userList) {
             BigDecimal tariffCost = getTariffCostForUser(user);
             try {
-                billingService.billForServices(user, tariffCost);
+                iBillingService.billForServices(user, tariffCost);
             } catch (MoneyNotFoundException e) {
                 logger.error("Money not found for user: " + user.getUserId(), e);
             } catch (InsufficientFundsException e) {

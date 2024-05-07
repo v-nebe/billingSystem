@@ -1,20 +1,16 @@
 package com.shavneva.billingserver;
 
-import com.shavneva.billingserver.service.impl.businesslogic.EmailServiceProvider;
+import com.shavneva.billingserver.service.IEmailServiceProvider;
 import com.shavneva.billingserver.service.impl.businesslogic.NotificationService;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 
-import com.shavneva.billingserver.service.impl.businesslogic.SmsServiceProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.SimpleMailMessage;
 
 import java.math.BigDecimal;
 
@@ -26,7 +22,7 @@ public class NotificationServiceTest {
     private NotificationService notificationService;
 
     @Autowired
-    private EmailServiceProvider emailServiceProvider;
+    private IEmailServiceProvider IEmailServiceProvider;
     
     @Test
     public void testNotifyUserAboutBalance_Email() {
@@ -37,6 +33,6 @@ public class NotificationServiceTest {
         notificationService.notifyUserAboutBalance(userEmail, balance, "123456789");
 
         // Проверяем, что уведомление было отправлено через EmailServiceProvider
-        verify(emailServiceProvider).sendNotification(eq(userEmail), anyString(), anyString());
+        verify(IEmailServiceProvider).sendNotification(eq(userEmail), anyString(), anyString());
     }
 }

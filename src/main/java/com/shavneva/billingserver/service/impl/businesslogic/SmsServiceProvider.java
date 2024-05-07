@@ -1,6 +1,7 @@
 package com.shavneva.billingserver.service.impl.businesslogic;
 
 import com.shavneva.billingserver.externals.SmsRequest;
+import com.shavneva.billingserver.service.ISmsServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class SmsServiceProvider {
+public class SmsServiceProvider implements ISmsServiceProvider {
     private final RestTemplate restTemplate;
     private final String smsSenderServerUrl = "http://localhost:8081/api";
 
@@ -19,6 +20,7 @@ public class SmsServiceProvider {
         this.restTemplate = restTemplate;
     }
 
+    @Override
     public void sendSms(String phoneNumber, String message){
         String url = smsSenderServerUrl + "/send-sms";
 
