@@ -44,7 +44,7 @@ public class PeriodicalWithdrawalMoney {
         }
     }
 
-    public BigDecimal getTariffCostForUser(User user) {
+    private BigDecimal getTariffCostForUser(User user) {
         Tariff tariff = user.getTariff();
 
         if (tariff != null) {
