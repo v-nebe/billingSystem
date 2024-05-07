@@ -4,6 +4,7 @@ import com.shavneva.billingserver.service.IEmailServiceProvider;
 import com.shavneva.billingserver.service.INotificationService;
 import com.shavneva.billingserver.service.ISmsServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -17,8 +18,8 @@ public class NotificationService implements INotificationService {
     private final boolean choose;
 
     @Autowired
-    public NotificationService(IEmailServiceProvider IEmailServiceProvider, SmsServiceProvider iSmsServiceProvider,
-                               boolean choose) {
+    public NotificationService(IEmailServiceProvider IEmailServiceProvider, ISmsServiceProvider iSmsServiceProvider,
+                               @Value("${notification.choose}") boolean choose) {
         this.IEmailServiceProvider = IEmailServiceProvider;
         this.iSmsServiceProvider = iSmsServiceProvider;
         this.choose = choose;

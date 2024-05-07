@@ -5,6 +5,7 @@ import com.shavneva.billingserver.converter.IMapper;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.ResourceNotFoundException;
 import com.shavneva.billingserver.repository.UserRepository;
+import com.shavneva.billingserver.service.IBillingService;
 import com.shavneva.billingserver.service.ICrudService;
 import com.shavneva.billingserver.service.impl.businesslogic.BillingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +16,24 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/billing")
 public class BillingController implements IBillingController {
-    private BillingService billingService;
-    private UserRepository userRepository;
+    private final IBillingService<User> IbillingService;
+    private final UserRepository userRepository;
     @Autowired
-    public BillingController( BillingService billingService, UserRepository userRepository ) {
-        this.billingService = billingService;
+    public BillingController( IBillingService<User> IbillingService, UserRepository userRepository ) {
+        this.IbillingService = IbillingService;
         this.userRepository = userRepository;
     }
     @Override
     public void billForServices(Integer userId, BigDecimal amount) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
-        billingService.billForServices(user, amount);
+        IbillingService.billForServices(user, amount);
     }
 
     @Override
     public void depositMoney(Integer userId, BigDecimal amount) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
-        billingService.depositMoney(user, amount);
+        IbillingService.depositMoney(user, amount);
     }
 }

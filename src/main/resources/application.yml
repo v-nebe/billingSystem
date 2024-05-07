@@ -45,3 +45,5 @@ spring:
 application:
   cron:
     expression: 0 */1 * * * ?
+notification:
+  choose: true

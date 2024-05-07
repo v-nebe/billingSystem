@@ -21,7 +21,7 @@ public class BillingService implements IBillingService<User> {
     private final INotificationService InotificationService;
 
     @Autowired
-    public BillingService(AccountRepository accountRepository, NotificationService InotificationService) {
+    public BillingService(AccountRepository accountRepository, INotificationService InotificationService) {
         this.accountRepository = accountRepository;
         this.InotificationService = InotificationService;
     }

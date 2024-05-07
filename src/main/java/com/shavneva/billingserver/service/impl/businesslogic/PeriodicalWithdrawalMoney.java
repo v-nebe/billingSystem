@@ -31,9 +31,7 @@ public class PeriodicalWithdrawalMoney {
     @Scheduled(cron = "${application.cron.expression:0 0 0 L * *}")
     public void periodicalWithdrawingMoney() {
 
-        List<User> userList = userService.getAll();
-
-        for (User user : userList) {
+        userService.getAll().forEach(user -> {
             BigDecimal tariffCost = getTariffCostForUser(user);
             try {
                 iBillingService.billForServices(user, tariffCost);
@@ -42,7 +40,7 @@ public class PeriodicalWithdrawalMoney {
             } catch (InsufficientFundsException e) {
                 logger.error("Insufficient funds for user: " + user.getUserId(), e);
             }
-        }
+        });
     }
 
     private BigDecimal getTariffCostForUser(User user) {
