@@ -1,6 +1,6 @@
 package com.shavneva.billingserver.service.impl.businesslogic;
 
-import com.shavneva.billingserver.classes.SmsRequest;
+import com.shavneva.billingserver.externals.SmsRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

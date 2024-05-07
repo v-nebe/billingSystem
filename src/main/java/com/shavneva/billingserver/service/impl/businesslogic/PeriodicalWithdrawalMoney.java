@@ -27,7 +27,7 @@ public class PeriodicalWithdrawalMoney {
         this.userService = userService;
     }
 
-    @Scheduled(cron = "${my.cron.expression:0 0 0 L * *}")
+    @Scheduled(cron = "${application.cron.expression:0 0 0 L * *}")
     public void periodicalWithdrawingMoney() {
 
         List<User> userList = userService.getAll();

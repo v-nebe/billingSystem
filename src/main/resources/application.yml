@@ -42,6 +42,6 @@ spring:
     enabled: true
 
 
-my:
+application:
   cron:
     expression: 0 */1 * * * ?

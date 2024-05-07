@@ -1,4 +1,4 @@
-package com.shavneva.billingserver.classes;
+package com.shavneva.billingserver.externals;
 
 import lombok.Data;
 
