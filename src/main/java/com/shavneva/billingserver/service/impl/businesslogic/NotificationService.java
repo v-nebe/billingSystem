@@ -19,7 +19,7 @@ public class NotificationService implements INotificationService {
 
     @Autowired
     public NotificationService(IEmailServiceProvider iEmailServiceProvider, ISmsServiceProvider iSmsServiceProvider,
-                               @Value("${notification.choose}") boolean choose) {
+                               @Value("${application.notification.choose}") boolean choose) {
         this.iEmailServiceProvider = iEmailServiceProvider;
         this.iSmsServiceProvider = iSmsServiceProvider;
         this.choose = choose;

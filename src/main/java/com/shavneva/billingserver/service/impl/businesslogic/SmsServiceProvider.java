@@ -18,8 +18,8 @@ public class SmsServiceProvider implements ISmsServiceProvider {
     private final String sendSmsEndpoint;
 
     @Autowired
-    public SmsServiceProvider(RestTemplate restTemplate, @Value("${sms.sender.server.url}") String smsSenderServerUrl,
-                              @Value("${sms.sender.server.send-sms-endpoint}") String sendSmsEndpoint) {
+    public SmsServiceProvider(RestTemplate restTemplate, @Value("${application.sms.sender.server.url}") String smsSenderServerUrl,
+                              @Value("${application.sms.sender.server.send-sms-endpoint}") String sendSmsEndpoint) {
         this.restTemplate = restTemplate;
         this.smsSenderServerUrl = smsSenderServerUrl;
         this.sendSmsEndpoint = sendSmsEndpoint;
