@@ -268,7 +268,7 @@ databaseChangeLog:
                   value: "1"
               - column:
                   name: amount
-                  value: "25"
+                  value: "1000"
         - insert:
             tableName: account
             columns:
@@ -277,7 +277,7 @@ databaseChangeLog:
                   value: "2"
               - column:
                   name: amount
-                  value: "30"
+                  value: "1000"
   - changeSet:
       id: 9
       author: vnebe
@@ -316,14 +316,14 @@ databaseChangeLog:
                   name: tariff_id
                   type: INT
                   constraints:
-                    nullable: false
+                    nullable: true
                     foreignKeyName: fk_user_tariff
                     references: tariff(tariff_id)
               - column:
                   name: account_id
                   type: INT
                   constraints:
-                    nullable: false
+                    nullable: true
                     foreignKeyName: fk_user_account
                     references: account(account_id)
 

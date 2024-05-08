@@ -1,13 +1,12 @@
 package com.shavneva.billingserver.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
+
 
 @Builder
 @Data
@@ -23,7 +22,7 @@ public class Tariff extends BaseEntity{
     @Column(name = "tariff_name")
     private String tariffName;
     @Column(name = "price")
-    private String price;
+    private BigDecimal price;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -33,6 +32,10 @@ public class Tariff extends BaseEntity{
             inverseJoinColumns = @JoinColumn(
                     name = "service_id"))
     private Collection<Services> services = new HashSet<>();
+
+    @ToString.Exclude
+    @OneToOne(mappedBy = "tariff")
+    private User user;
 
     @Override
     public Integer getId() {

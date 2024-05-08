@@ -14,7 +14,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ComponentScan("com.shavneva.billingsystemserver.config")
+@ComponentScan("com.shavneva.billingserver.config")
 public class SecurityConfig {
 
     @Bean
@@ -28,6 +28,8 @@ public class SecurityConfig {
                 .disable()
                 .httpBasic(basic -> basic.securityContextRepository(new HttpSessionSecurityContextRepository()))
                 .authorizeRequests()
+                .requestMatchers("/api/user/create")
+                .anonymous()
                 .requestMatchers("/api/**")
                 .fullyAuthenticated()
                 .requestMatchers("/**")

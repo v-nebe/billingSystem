@@ -7,8 +7,6 @@ import jakarta.persistence.Id;
 public abstract class BaseEntity {
     private Integer id;
 
-    // Геттеры и сеттеры для id
-
     public Integer getId() {
         return id;
     }

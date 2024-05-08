@@ -1,13 +1,11 @@
 package com.shavneva.billingserver.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.function.ToDoubleBiFunction;
 
 @Builder
 @Data
@@ -23,6 +21,7 @@ public class Services extends BaseEntity{
     @Column(name = "service")
     private String service;
 
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "services")
     private Collection<Tariff> tariffs = new HashSet<>();
 

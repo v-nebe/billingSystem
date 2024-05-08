@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController extends BaseController<User, UserDto> {
 
     @Autowired
@@ -20,7 +20,6 @@ public class UserController extends BaseController<User, UserDto> {
         super(userService, userMapper);
     }
     @Override
-    @PreAuthorize("permitAll()")
     public UserDto create(UserDto userDto) {
         return super.create(userDto);
     }
