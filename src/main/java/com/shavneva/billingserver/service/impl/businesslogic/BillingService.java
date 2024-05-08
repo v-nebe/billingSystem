@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 
 @Service
-@EnableScheduling
 public class BillingService implements IBillingService<User> {
 
     private final AccountRepository accountRepository;
