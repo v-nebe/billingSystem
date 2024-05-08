@@ -18,12 +18,12 @@ import java.math.BigDecimal;
 public class BillingService implements IBillingService<User> {
 
     private final AccountRepository accountRepository;
-    private final INotificationService InotificationService;
+    private final INotificationService iNotificationService;
 
     @Autowired
-    public BillingService(AccountRepository accountRepository, INotificationService InotificationService) {
+    public BillingService(AccountRepository accountRepository, INotificationService iNotificationService) {
         this.accountRepository = accountRepository;
-        this.InotificationService = InotificationService;
+        this.iNotificationService = iNotificationService;
     }
 
     //выставить счет пользователю и снять деньги за предоставленные услуги
@@ -36,7 +36,7 @@ public class BillingService implements IBillingService<User> {
 
         BigDecimal currentAmount = account.getAmount();
         if (currentAmount.compareTo(tariffCost) < 0) {
-            InotificationService.notifyUserInsufficientFunds(user.getEmail(), user.getNumber());
+            iNotificationService.notifyUserInsufficientFunds(user.getEmail(), user.getNumber());
             throw new InsufficientFundsException("Insufficient funds to pay for services");
         }
 
@@ -44,7 +44,7 @@ public class BillingService implements IBillingService<User> {
         accountRepository.save(account);
 
         // Уведомление пользователя о списании средств
-        InotificationService.notifyUserAboutBalance(user.getEmail(), account.getAmount(), user.getNumber());
+        iNotificationService.notifyUserAboutBalance(user.getEmail(), account.getAmount(), user.getNumber());
     }
 
     //выполняет пополнение счета для пользователя
@@ -62,6 +62,6 @@ public class BillingService implements IBillingService<User> {
         accountRepository.save(account);
 
         // Уведомление пользователя о пополнении счета
-        InotificationService.notifyUserAboutDeposit(user.getEmail(), amount, user.getNumber());
+        iNotificationService.notifyUserAboutDeposit(user.getEmail(), amount, user.getNumber());
     }
 }

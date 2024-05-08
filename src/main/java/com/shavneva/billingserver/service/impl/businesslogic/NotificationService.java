@@ -12,15 +12,15 @@ import java.math.BigDecimal;
 @Service
 public class NotificationService implements INotificationService {
 
-    private final IEmailServiceProvider IEmailServiceProvider;
+    private final IEmailServiceProvider iEmailServiceProvider;
     private final ISmsServiceProvider iSmsServiceProvider;
     // Флаг, определяющий способ уведомления: true - через электронную почту, false - через SMS
     private final boolean choose;
 
     @Autowired
-    public NotificationService(IEmailServiceProvider IEmailServiceProvider, ISmsServiceProvider iSmsServiceProvider,
+    public NotificationService(IEmailServiceProvider iEmailServiceProvider, ISmsServiceProvider iSmsServiceProvider,
                                @Value("${notification.choose}") boolean choose) {
-        this.IEmailServiceProvider = IEmailServiceProvider;
+        this.iEmailServiceProvider = iEmailServiceProvider;
         this.iSmsServiceProvider = iSmsServiceProvider;
         this.choose = choose;
     }
@@ -30,7 +30,7 @@ public class NotificationService implements INotificationService {
         String subject = "Уведомление о балансе";
         String message = "На вашем счете осталось: " + balance.toString();
         if(choose){
-            IEmailServiceProvider.sendNotification(userEmail, subject, message);
+            iEmailServiceProvider.sendNotification(userEmail, subject, message);
         }else {
             iSmsServiceProvider.sendSms(phoneNumber, message);
         }
@@ -41,7 +41,7 @@ public class NotificationService implements INotificationService {
         String subject = "Уведомление о пополнении счета";
         String message = "Ваш счет был пополнен на сумму: " + amount.toString();
         if(choose){
-            IEmailServiceProvider.sendNotification(userEmail, subject, message);
+            iEmailServiceProvider.sendNotification(userEmail, subject, message);
         }else {
             iSmsServiceProvider.sendSms(phoneNumber, message);
         }
@@ -52,7 +52,7 @@ public class NotificationService implements INotificationService {
         String subject = "Уведомление о недостатке средств";
         String message = "На вашем счете недостаточно средств для выполнения операции";
         if (choose) {
-            IEmailServiceProvider.sendNotification(userEmail, subject, message);
+            iEmailServiceProvider.sendNotification(userEmail, subject, message);
         } else {
             iSmsServiceProvider.sendSms(phoneNumber, message);
         }

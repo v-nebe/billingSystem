@@ -14,7 +14,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ComponentScan("com.shavneva.billing server.config")
+@ComponentScan("com.shavneva.billingserver.config")
 public class SecurityConfig {
 
     @Bean

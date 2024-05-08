@@ -44,12 +44,10 @@ spring:
 application:
   cron:
     expression: 0 */1 * * * ?
-
-notification:
-  choose: true
-
-sms:
-  sender:
-    server:
-      url: http://localhost:8081/api
-      send-sms-endpoint: /send-sms
+  notification:
+    choose: true
+  sms:
+    sender:
+     server:
+        url: http://localhost:8081/api
+        send-sms-endpoint: /send-sms

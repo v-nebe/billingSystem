@@ -5,6 +5,7 @@ import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.InsufficientFundsException;
 import com.shavneva.billingserver.exception.MoneyNotFoundException;
 import com.shavneva.billingserver.service.IBillingService;
+import com.shavneva.billingserver.service.IPeriodicalWithdrawalMoney;
 import com.shavneva.billingserver.service.impl.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +14,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Component
-public class PeriodicalWithdrawalMoney {
+public class PeriodicalWithdrawalMoney implements IPeriodicalWithdrawalMoney {
 
     private final IBillingService<User> iBillingService;
     private final UserService userService;
@@ -28,6 +28,7 @@ public class PeriodicalWithdrawalMoney {
         this.userService = userService;
     }
 
+    @Override
     @Scheduled(cron = "${application.cron.expression:0 0 0 L * *}")
     public void periodicalWithdrawingMoney() {
 
