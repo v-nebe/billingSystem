@@ -5,6 +5,7 @@ import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.InsufficientFundsException;
 import com.shavneva.billingserver.exception.MoneyNotFoundException;
 import com.shavneva.billingserver.service.IBillingService;
+import com.shavneva.billingserver.service.ICrudService;
 import com.shavneva.billingserver.service.IPeriodicalWithdrawalMoney;
 import com.shavneva.billingserver.service.impl.UserService;
 import org.slf4j.Logger;
@@ -19,11 +20,11 @@ import java.math.BigDecimal;
 public class PeriodicalWithdrawalMoney implements IPeriodicalWithdrawalMoney {
 
     private final IBillingService<User> iBillingService;
-    private final UserService userService;
+    private final ICrudService<User> userService;
     private static final Logger logger = LoggerFactory.getLogger(Logger.class);
 
     @Autowired
-    public PeriodicalWithdrawalMoney(IBillingService<User> iBillingService, UserService userService) {
+    public PeriodicalWithdrawalMoney(IBillingService<User> iBillingService, ICrudService<User> userService) {
         this.iBillingService = iBillingService;
         this.userService = userService;
     }
