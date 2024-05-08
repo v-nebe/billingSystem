@@ -2,6 +2,8 @@ package com.shavneva.billingserver.service.impl.businesslogic;
 
 import com.shavneva.billingserver.externals.SmsRequest;
 import com.shavneva.billingserver.service.ISmsServiceProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -16,6 +18,7 @@ public class SmsServiceProvider implements ISmsServiceProvider {
     private final RestTemplate restTemplate;
     private final String smsSenderServerUrl;
     private final String sendSmsEndpoint;
+    private static final Logger logger = LoggerFactory.getLogger(Logger.class);
 
     @Autowired
     public SmsServiceProvider(RestTemplate restTemplate, @Value("${application.sms.sender.server.url}") String smsSenderServerUrl,
@@ -37,9 +40,9 @@ public class SmsServiceProvider implements ISmsServiceProvider {
 
         ResponseEntity<Void> response = restTemplate.postForEntity(url, request, Void.class);
         if (response.getStatusCode().is2xxSuccessful()) {
-            System.out.println("SMS successfully sent");
+            logger.info("SMS successfully sent");
         } else {
-            System.out.println("Failed to send SMS");
+            logger.info("Failed to send SMS");
         }
 
     }
