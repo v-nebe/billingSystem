@@ -414,12 +414,6 @@ databaseChangeLog:
               - column:
                   name: role_name
                   value: "Пользователь"
-        - insert:
-            tableName: role
-            columns:
-              - column:
-                  name: role_name
-                  value: "Бухгалтер"
 
   - changeSet:
       id: 13
@@ -494,12 +488,3 @@ databaseChangeLog:
              schemaName: public
              tableName: role
              where: role_id='2'
-         - update:
-             catalogName: billing
-             columns:
-               - column:
-                   name: role_name
-                   value: "ROLE_ACCOUNTANT"
-             schemaName: public
-             tableName: role
-             where: role_id='3'

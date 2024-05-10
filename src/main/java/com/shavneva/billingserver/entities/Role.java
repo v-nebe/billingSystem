@@ -8,12 +8,16 @@ import java.util.HashSet;
 
 @Entity
 @Table(name = "role")
-public class Role {
+public class Role extends BaseEntity {
+    @Setter
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private Long roleId;
+    private Integer roleId;
+
     @Getter
+    @Setter
     @Column(name = "role_name")
     private String roleName;
 
