@@ -77,19 +77,23 @@ public class BillingServiceTest {
 
     @Test
     public void testDepositMoney() {
-        User user = new User();
-        user.setEmail("example@example.com");
-        user.setNumber("1234567890");
-        Account account = new Account();
-        account.setAmount(BigDecimal.valueOf(100));
-        user.setAccount(account);
-
+        String userEmail = "example@example.com";
+        String userNumber = "1234567890";
+        BigDecimal initialAmount = BigDecimal.valueOf(100);
         BigDecimal amountToDeposit = BigDecimal.valueOf(50);
 
-        billingService.depositMoney(user, amountToDeposit);
+        User user = new User();
+        user.setEmail(userEmail);
+        user.setNumber(userNumber);
+
+        Account account = new Account();
+        account.setAmount(initialAmount);
+        user.setAccount(account);
+
+        billingService.depositMoney(userEmail, amountToDeposit);
 
         verify(accountRepository, times(1)).save(any(Account.class));
-        verify(notificationService, times(1)).notifyUserAboutDeposit(eq("example@example.com"),
-                eq(BigDecimal.valueOf(50)), eq("1234567890"));
+        verify(notificationService, times(1)).notifyUserAboutDeposit(eq(userEmail), eq(amountToDeposit), eq(userNumber));
+    }
     }
 }

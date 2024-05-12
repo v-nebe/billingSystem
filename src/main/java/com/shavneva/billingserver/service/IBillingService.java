@@ -7,5 +7,5 @@ import java.math.BigDecimal;
 public interface IBillingService<E> {
     void billForServices(E e, BigDecimal amount);
 
-    void depositMoney(E e, BigDecimal amount);
+    void depositMoney(String email, BigDecimal amount);
 }

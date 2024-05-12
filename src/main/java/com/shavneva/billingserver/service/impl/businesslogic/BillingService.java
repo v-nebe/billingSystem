@@ -4,7 +4,9 @@ import com.shavneva.billingserver.entities.Account;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.InsufficientFundsException;
 import com.shavneva.billingserver.exception.MoneyNotFoundException;
+import com.shavneva.billingserver.exception.ResourceNotFoundException;
 import com.shavneva.billingserver.repository.AccountRepository;
+import com.shavneva.billingserver.repository.UserRepository;
 import com.shavneva.billingserver.service.IBillingService;
 import com.shavneva.billingserver.service.INotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,14 @@ import java.math.BigDecimal;
 public class BillingService implements IBillingService<User> {
 
     private final AccountRepository accountRepository;
+    private final UserRepository userRepository;
     private final INotificationService iNotificationService;
 
     @Autowired
-    public BillingService(AccountRepository accountRepository, INotificationService iNotificationService) {
+    public BillingService(AccountRepository accountRepository, UserRepository userRepository,
+                          INotificationService iNotificationService) {
         this.accountRepository = accountRepository;
+        this.userRepository = userRepository;
         this.iNotificationService = iNotificationService;
     }
 
@@ -48,18 +53,22 @@ public class BillingService implements IBillingService<User> {
 
     //выполняет пополнение счета для пользователя
     @Override
-    public void depositMoney(User user, BigDecimal amount) {
+    public void depositMoney(String email, BigDecimal amount) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new ResourceNotFoundException("User not found with email: " + email);
+        }
+
+        // Реализация метода депозита денег
         Account account = user.getAccount();
         if (account == null) {
             account = new Account();
             account.setUser(user);
             account.setAmount(BigDecimal.ZERO);
-
         }
 
         account.setAmount(account.getAmount().add(amount));
         accountRepository.save(account);
-
         // Уведомление пользователя о пополнении счета
         iNotificationService.notifyUserAboutDeposit(user.getEmail(), amount, user.getNumber());
     }

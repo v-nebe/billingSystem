@@ -15,11 +15,13 @@ import java.math.BigDecimal;
 public class BillingController implements IBillingController {
     private final IBillingService<User> iBillingService;
     private final UserRepository userRepository;
+
     @Autowired
-    public BillingController(IBillingService<User> iBillingService, UserRepository userRepository ) {
+    public BillingController(IBillingService<User> iBillingService, UserRepository userRepository) {
         this.iBillingService = iBillingService;
         this.userRepository = userRepository;
     }
+
     @Override
     public void billForServices(Integer userId, BigDecimal amount) {
         User user = userRepository.findById(userId)
@@ -28,9 +30,10 @@ public class BillingController implements IBillingController {
     }
 
     @Override
-    public void depositMoney(Integer userId, BigDecimal amount) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
-        iBillingService.depositMoney(user, amount);
+    public void depositMoney(String email, BigDecimal amount) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new ResourceNotFoundException("User not found with email: " + email);
+        }
     }
 }
