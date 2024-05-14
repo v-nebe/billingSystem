@@ -5,6 +5,9 @@ import com.shavneva.billingserver.dto.ServiceDto;
 import com.shavneva.billingserver.entities.Services;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ServicesMapper implements IMapper<Services, ServiceDto> {
     @Override
@@ -21,5 +24,11 @@ public class ServicesMapper implements IMapper<Services, ServiceDto> {
         entity.setServiceId(serviceDto.getServiceId());
         entity.setService(serviceDto.getService());
         return entity;
+    }
+
+    public List<ServiceDto> toDtoList(List<Services> services) {
+        return services.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
     }
 }

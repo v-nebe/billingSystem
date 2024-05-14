@@ -28,8 +28,8 @@ public class TariffController extends BaseController<Tariff, TariffDto> {
     }
 
     @Override
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostFilter("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')or hasRole('ROLE_USER')")
+    @PostFilter("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<TariffDto> getAll() {
         return super.getAll();
     }
@@ -51,4 +51,5 @@ public class TariffController extends BaseController<Tariff, TariffDto> {
     public void delete(int id) {
         super.delete(id);
     }
+
 }

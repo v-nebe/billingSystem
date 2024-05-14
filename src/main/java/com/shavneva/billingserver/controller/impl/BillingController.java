@@ -3,6 +3,7 @@ package com.shavneva.billingserver.controller.impl;
 import com.shavneva.billingserver.controller.IBillingController;
 import com.shavneva.billingserver.entities.User;
 import com.shavneva.billingserver.exception.ResourceNotFoundException;
+import com.shavneva.billingserver.externals.DepositRequest;
 import com.shavneva.billingserver.repository.UserRepository;
 import com.shavneva.billingserver.service.IBillingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,11 @@ public class BillingController implements IBillingController {
     }
 
     @Override
-    public void depositMoney(String email, BigDecimal amount) {
-        User user = userRepository.findByEmail(email);
+    public void depositMoney(@RequestBody DepositRequest request) {
+        User user = userRepository.findByEmail(request.getEmail());
         if (user == null) {
-            throw new ResourceNotFoundException("User not found with email: " + email);
+            throw new ResourceNotFoundException("User not found with email: " + request.getEmail());
         }
+        iBillingService.depositMoney(user.getEmail(), request.getAmount());
     }
 }
