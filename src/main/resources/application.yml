@@ -42,7 +42,6 @@ spring:
     enabled: true
 
 application:
-
   notification:
     choose: true
   sms:

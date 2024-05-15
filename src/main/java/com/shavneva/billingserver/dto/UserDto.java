@@ -19,4 +19,10 @@ public class UserDto  {
     @NotBlank
     @Size(min = 6)
     String password;
+
+    TariffDto tariff;
+
+    AccountDto account;
+
+    RoleDto role;
 }

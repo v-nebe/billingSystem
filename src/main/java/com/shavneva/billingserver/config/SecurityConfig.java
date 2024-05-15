@@ -30,6 +30,8 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers("/api/user/create")
                 .anonymous()
+                .requestMatchers("/api/tariffs/tariffs-with-services")
+                .anonymous()
                 .requestMatchers("/api/**")
                 .fullyAuthenticated()
                 .requestMatchers("/**")

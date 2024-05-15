@@ -6,6 +6,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class TariffDto {
@@ -18,4 +19,5 @@ public class TariffDto {
     @PositiveOrZero(message = "Сумма должна быть положительной или нулевой")
     BigDecimal price;
 
+    private List<ServiceDto> services;
 }
