@@ -1,17 +1,8 @@
 package com.shavneva.billingserver.controller.impl;
 
-import com.shavneva.billingserver.converter.impl.AccountMapper;
-import com.shavneva.billingserver.converter.impl.RoleMapper;
-import com.shavneva.billingserver.converter.impl.TariffMapper;
-import com.shavneva.billingserver.converter.impl.UserMapper;
-import com.shavneva.billingserver.dto.AccountDto;
-import com.shavneva.billingserver.dto.RoleDto;
-import com.shavneva.billingserver.dto.TariffDto;
-import com.shavneva.billingserver.dto.UserDto;
-import com.shavneva.billingserver.entities.Account;
-import com.shavneva.billingserver.entities.Role;
-import com.shavneva.billingserver.entities.Tariff;
-import com.shavneva.billingserver.entities.User;
+import com.shavneva.billingserver.converter.impl.*;
+import com.shavneva.billingserver.dto.*;
+import com.shavneva.billingserver.entities.*;
 import com.shavneva.billingserver.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +28,8 @@ public class UserController extends BaseController<User, UserDto> {
         return super.create(userDto);
     }
 
-    @GetMapping("/users-with-tariffs-and-accounts")
-    public ResponseEntity<List<UserDto>> getAllUsersWithTariffsAndAccounts() {
+    @GetMapping("/all-info-user")
+    public ResponseEntity<List<UserDto>> getAllInfoUsers() {
         List<User> users = userService.getAll();
         List<UserDto> userDtos = new ArrayList<>();
 
@@ -46,41 +37,27 @@ public class UserController extends BaseController<User, UserDto> {
             UserMapper userMapper = new UserMapper();
             UserDto userDto = userMapper.mapToDto(user);
 
-            // Получаем информацию о тарифе пользователя
             Tariff tariff = user.getTariff();
             TariffMapper tariffMapper = new TariffMapper();
             TariffDto tariffDto = tariffMapper.mapToDto(tariff);
             userDto.setTariff(tariffDto);
 
-            // Получаем информацию о счете пользователя
             Account account = user.getAccount();
             AccountMapper accountMapper = new AccountMapper();
             AccountDto accountDto = accountMapper.mapToDto(account);
             userDto.setAccount(accountDto);
 
+            List<RoleDto> roleDtos = new ArrayList<>();
+            for (Role role : user.getRoles()) {
+                RoleDto roleDto = new RoleDto();
+                roleDto.setRoleId(role.getRoleId());
+                roleDto.setRoleName(role.getRoleName());
+                roleDtos.add(roleDto);
+            }
+            userDto.setRoles(roleDtos);
+
             userDtos.add(userDto);
         }
-
-        return ResponseEntity.ok(userDtos);
-    }
-
-    @GetMapping("/user-role")
-    public ResponseEntity<List<UserDto>> getAllUsersWithRoles() {
-        List<User> users = userService.getAll();
-        List<UserDto> userDtos = new ArrayList<>();
-
-       /* for (User user : users) {
-            UserMapper userMapper = new UserMapper();
-            UserDto userDto = userMapper.mapToDto(user);
-
-            // Получаем информацию о роли пользователя
-            Role role = user.getRole();
-            RoleMapper roleMapper = new RoleMapper();
-            RoleDto roleDto = roleMapper.mapToDto(role);
-            userDto.setRole(roleDto);
-
-            userDtos.add(userDto);
-        }*/
 
         return ResponseEntity.ok(userDtos);
     }

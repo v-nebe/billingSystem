@@ -57,6 +57,10 @@ public class User extends BaseEntity implements UserDetails {
         roles.forEach(r -> authorities.add(new SimpleGrantedAuthority(r.getRoleName())));
         return authorities;
     }
+
+    @Column(name = "notification_type")
+    private String notificationType;
+
     @Override
     public String getUsername() {
         return email;

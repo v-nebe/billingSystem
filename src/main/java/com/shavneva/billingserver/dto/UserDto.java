@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UserDto  {
     Integer userId;
@@ -17,12 +19,14 @@ public class UserDto  {
     @NotBlank
     String number;
     @NotBlank
-    @Size(min = 6)
+    @Size(min = 5)
     String password;
 
     TariffDto tariff;
 
     AccountDto account;
 
-    RoleDto role;
+    String notificationType;
+
+    private List<RoleDto> roles;
 }

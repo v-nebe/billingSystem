@@ -1,5 +1,7 @@
 package com.shavneva.billingserver.service.impl.businesslogic;
 
+import com.shavneva.billingserver.entities.User;
+import com.shavneva.billingserver.repository.UserRepository;
 import com.shavneva.billingserver.service.IEmailServiceProvider;
 import com.shavneva.billingserver.service.INotificationService;
 import com.shavneva.billingserver.service.ISmsServiceProvider;
@@ -14,47 +16,54 @@ public class NotificationService implements INotificationService {
 
     private final IEmailServiceProvider iEmailServiceProvider;
     private final ISmsServiceProvider iSmsServiceProvider;
-    // Флаг, определяющий способ уведомления: true - через электронную почту, false - через SMS
-    private final boolean choose;
+    private final UserRepository userRepository;
 
     @Autowired
-    public NotificationService(IEmailServiceProvider iEmailServiceProvider, ISmsServiceProvider iSmsServiceProvider,
-                               @Value("${application.notification.choose}") boolean choose) {
+    public NotificationService(IEmailServiceProvider iEmailServiceProvider, ISmsServiceProvider iSmsServiceProvider, UserRepository userRepository) {
         this.iEmailServiceProvider = iEmailServiceProvider;
         this.iSmsServiceProvider = iSmsServiceProvider;
-        this.choose = choose;
+        this.userRepository = userRepository;
     }
 
     @Override
     public void notifyUserAboutBalance(String userEmail, BigDecimal balance, String phoneNumber) {
+        User user = userRepository.findByEmail(userEmail);
         String subject = "Уведомление о балансе";
         String message = "На вашем счете осталось: " + balance.toString();
-        if(choose){
-            iEmailServiceProvider.sendNotification(userEmail, subject, message);
-        }else {
-            iSmsServiceProvider.sendSms(phoneNumber, message);
+        if (user != null) {
+            if ("email".equals(user.getNotificationType())) {
+                iEmailServiceProvider.sendNotification(userEmail, subject, message);
+            } else if ("sms".equals(user.getNotificationType())) {
+                iSmsServiceProvider.sendSms(phoneNumber, message);
+            }
         }
     }
 
     @Override
     public void notifyUserAboutDeposit(String userEmail, BigDecimal amount, String phoneNumber) {
+        User user = userRepository.findByEmail(userEmail);
         String subject = "Уведомление о пополнении счета";
         String message = "Ваш счет был пополнен на сумму: " + amount.toString();
-        if(choose){
-            iEmailServiceProvider.sendNotification(userEmail, subject, message);
-        }else {
-            iSmsServiceProvider.sendSms(phoneNumber, message);
+        if (user != null) {
+            if ("email".equals(user.getNotificationType())) {
+                iEmailServiceProvider.sendNotification(userEmail, subject, message);
+            } else if ("sms".equals(user.getNotificationType())) {
+                iSmsServiceProvider.sendSms(phoneNumber, message);
+            }
         }
     }
 
     @Override
     public void notifyUserInsufficientFunds(String userEmail, String phoneNumber) {
+        User user = userRepository.findByEmail(userEmail);
         String subject = "Уведомление о недостатке средств";
         String message = "На вашем счете недостаточно средств для выполнения операции";
-        if (choose) {
-            iEmailServiceProvider.sendNotification(userEmail, subject, message);
-        } else {
-            iSmsServiceProvider.sendSms(phoneNumber, message);
+        if (user != null) {
+            if ("email".equals(user.getNotificationType())) {
+                iEmailServiceProvider.sendNotification(userEmail, subject, message);
+            } else if ("sms".equals(user.getNotificationType())) {
+                iSmsServiceProvider.sendSms(phoneNumber, message);
+            }
         }
     }
 }

@@ -278,6 +278,15 @@ databaseChangeLog:
               - column:
                   name: amount
                   value: "1000"
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: account_id
+                  value: "3"
+              - column:
+                  name: amount
+                  value: "1000"
   - changeSet:
       id: 9
       author: vnebe
@@ -326,6 +335,9 @@ databaseChangeLog:
                     nullable: true
                     foreignKeyName: fk_user_account
                     references: account(account_id)
+              - column:
+                  name: notification_type
+                  type: varchar(100)
 
   - changeSet:
       id: 10
@@ -352,10 +364,13 @@ databaseChangeLog:
                   value: "admin"
               - column:
                   name: tariff_id
-                  value: "1"
+                  value: "3"
               - column:
                   name: account_id
                   value: "1"
+              - column:
+                  name: notification_type
+                  value: "email"
         - insert:
             tableName: user
             columns:
@@ -380,6 +395,36 @@ databaseChangeLog:
               - column:
                   name: account_id
                   value: "2"
+              - column:
+                  name: notification_type
+                  value: "email"
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: first_name
+                  value: "user"
+              - column:
+                  name: last_name
+                  value: "user"
+              - column:
+                  name: email
+                  value: "user@gmail.com"
+              - column:
+                  name: number
+                  value: "+375290000002"
+              - column:
+                  name: password
+                  value: "user1"
+              - column:
+                  name: tariff_id
+                  value: "1"
+              - column:
+                  name: account_id
+                  value: "3"
+              - column:
+                  name: notification_type
+                  value: "sms"
 
   - changeSet:
       id: 11
@@ -462,6 +507,15 @@ databaseChangeLog:
               - column:
                   name: user_id
                   value: "2"
+              - column:
+                  name: role_id
+                  value: "2"
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: "3"
               - column:
                   name: role_id
                   value: "2"

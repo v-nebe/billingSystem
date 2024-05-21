@@ -15,4 +15,12 @@ public class RoleDto {
     @Getter
     @Setter
     String roleName;
+
+    @Override
+    public String toString() {
+        return "RoleDto{" +
+                "roleId=" + roleId +
+                ", roleName='" + roleName + '\'' +
+                '}';
+    }
 }
