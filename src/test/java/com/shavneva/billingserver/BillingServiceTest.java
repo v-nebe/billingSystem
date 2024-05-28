@@ -100,5 +100,4 @@ public class BillingServiceTest {
         verify(accountRepository, times(1)).save(any(Account.class));
         verify(notificationService, times(1)).notifyUserAboutDeposit(eq(userEmail), eq(amountToDeposit), eq(userNumber));
     }
-    }
 }
