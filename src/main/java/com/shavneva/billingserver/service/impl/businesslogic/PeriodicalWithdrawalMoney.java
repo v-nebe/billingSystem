@@ -23,6 +23,8 @@ public class PeriodicalWithdrawalMoney implements IPeriodicalWithdrawalMoney {
     private final ICrudService<User> userService;
     private static final Logger logger = LoggerFactory.getLogger(Logger.class);
 
+
+
     @Autowired
     public PeriodicalWithdrawalMoney(IBillingService<User> iBillingService, ICrudService<User> userService) {
         this.iBillingService = iBillingService;

@@ -51,15 +51,15 @@ public class User extends BaseEntity implements UserDetails {
     @JoinColumn(name = "tariff_id")
     private Tariff tariff;
 
+    @Column(name = "notification_type")
+    private String notificationType;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         roles.forEach(r -> authorities.add(new SimpleGrantedAuthority(r.getRoleName())));
         return authorities;
     }
-
-    @Column(name = "notification_type")
-    private String notificationType;
 
     @Override
     public String getUsername() {

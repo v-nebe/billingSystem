@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 public class ServicesMapper implements IMapper<Services, ServiceDto> {
     @Override
     public ServiceDto mapToDto(Services entity) {
+        if(entity == null){
+            return null;
+        }
         ServiceDto dto = new ServiceDto();
         dto.setServiceId(entity.getServiceId());
         dto.setService(entity.getService());
@@ -20,6 +23,9 @@ public class ServicesMapper implements IMapper<Services, ServiceDto> {
 
     @Override
     public Services mapToEntity(ServiceDto serviceDto) {
+        if(serviceDto == null){
+            return null;
+        }
         Services entity =  new Services();
         entity.setServiceId(serviceDto.getServiceId());
         entity.setService(serviceDto.getService());

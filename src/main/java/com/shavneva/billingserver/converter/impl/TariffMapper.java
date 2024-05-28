@@ -10,6 +10,9 @@ public class TariffMapper implements IMapper<Tariff, TariffDto> {
 
     @Override
     public TariffDto mapToDto(Tariff entity) {
+        if (entity == null) {
+            return null;
+        }
         TariffDto dto = new TariffDto();
         dto.setTariffId(entity.getTariffId());
         dto.setTariffName(entity.getTariffName());
@@ -19,6 +22,9 @@ public class TariffMapper implements IMapper<Tariff, TariffDto> {
 
     @Override
     public Tariff mapToEntity(TariffDto tariffDto) {
+        if (tariffDto == null) {
+            return null;
+        }
         Tariff entity = new Tariff();
         entity.setTariffId(tariffDto.getTariffId());
         entity.setTariffName(tariffDto.getTariffName());

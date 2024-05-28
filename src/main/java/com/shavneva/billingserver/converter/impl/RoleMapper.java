@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 public class RoleMapper implements IMapper<Role, RoleDto> {
     @Override
     public RoleDto mapToDto(Role entity) {
+        if(entity == null){
+            return null;
+        }
         RoleDto dto = new RoleDto();
         dto.setRoleId(entity.getRoleId());
         dto.setRoleName(entity.getRoleName());
@@ -17,6 +20,9 @@ public class RoleMapper implements IMapper<Role, RoleDto> {
 
     @Override
     public Role mapToEntity(RoleDto roleDto) {
+        if(roleDto == null){
+            return null;
+        }
         Role entity = new Role();
         entity.setRoleId(roleDto.getRoleId());
         entity.setRoleName(roleDto.getRoleName());

@@ -7,11 +7,16 @@ import com.shavneva.billingserver.repository.RoleRepository;
 import com.shavneva.billingserver.repository.TariffRepository;
 import com.shavneva.billingserver.repository.UserRepository;
 import com.shavneva.billingserver.repository.AccountRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.shavneva.billingserver.entities.Tariff;
 
+import java.math.BigDecimal;
 import java.util.Collections;
+
+import static com.mysql.cj.conf.PropertyKey.logger;
 
 @Service
 public class UserService extends BaseService<User, Integer> {
@@ -20,6 +25,7 @@ public class UserService extends BaseService<User, Integer> {
     private final AccountRepository accountRepository;
     private final RoleRepository roleRepository;
     private final TariffRepository tariffRepository;
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     public UserService(UserRepository userRepository, AccountRepository accountRepository, RoleRepository roleRepository, TariffRepository tariffRepository) {
@@ -62,6 +68,9 @@ public class UserService extends BaseService<User, Integer> {
         if (updatedEntity.getRoles() != null && !updatedEntity.getRoles().isEmpty()) {
             existingEntity.setRoles(updatedEntity.getRoles());
         }
+        if (updatedEntity.getNotificationType() != null) {
+            existingEntity.setNotificationType(updatedEntity.getNotificationType());
+        }
 
         // Сохраняем обновленную сущность
         return userRepository.save(existingEntity);
@@ -69,30 +78,34 @@ public class UserService extends BaseService<User, Integer> {
 
     @Override
     public User create(User user) {
-        // Set default tariff
+        logger.info("Attempting to create a new user with email: {}", user.getEmail());
+
         Tariff defaultTariff = tariffRepository.findById(3)
                 .orElseThrow(() -> new IllegalStateException("Default tariff not found"));
+        logger.info("Default tariff found: {}", defaultTariff);
         user.setTariff(defaultTariff);
 
-        // Create new account
         Account newAccount = new Account();
+        newAccount.setAmount(BigDecimal.valueOf(0));
         newAccount = accountRepository.save(newAccount);
+        logger.info("New account created with ID: {}", newAccount.getId());
         user.setAccount(newAccount);
 
-        // Set default notification type
         user.setNotificationType("email");
+        logger.info("Notification type set to: email");
 
-        // Set default role
         Role userRole = roleRepository.findByRoleName("ROLE_USER");
         if (userRole != null) {
             user.setRoles(Collections.singleton(userRole));
+            logger.info("User role set to: ROLE_USER");
         } else {
             throw new IllegalStateException("Role ROLE_USER not found");
         }
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        logger.info("User created successfully with ID: {}", savedUser.getId());
+        return savedUser;
     }
-
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }

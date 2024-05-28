@@ -28,40 +28,6 @@ public class UserController extends BaseController<User, UserDto> {
         return super.create(userDto);
     }
 
-    @GetMapping("/all-info-user")
-    public ResponseEntity<List<UserDto>> getAllInfoUsers() {
-        List<User> users = userService.getAll();
-        List<UserDto> userDtos = new ArrayList<>();
-
-        for (User user : users) {
-            UserMapper userMapper = new UserMapper();
-            UserDto userDto = userMapper.mapToDto(user);
-
-            Tariff tariff = user.getTariff();
-            TariffMapper tariffMapper = new TariffMapper();
-            TariffDto tariffDto = tariffMapper.mapToDto(tariff);
-            userDto.setTariff(tariffDto);
-
-            Account account = user.getAccount();
-            AccountMapper accountMapper = new AccountMapper();
-            AccountDto accountDto = accountMapper.mapToDto(account);
-            userDto.setAccount(accountDto);
-
-            List<RoleDto> roleDtos = new ArrayList<>();
-            for (Role role : user.getRoles()) {
-                RoleDto roleDto = new RoleDto();
-                roleDto.setRoleId(role.getRoleId());
-                roleDto.setRoleName(role.getRoleName());
-                roleDtos.add(roleDto);
-            }
-            userDto.setRoles(roleDtos);
-
-            userDtos.add(userDto);
-        }
-
-        return ResponseEntity.ok(userDtos);
-    }
-
     @Override
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @PostFilter("hasRole('ROLE_ADMIN') or filterObject.email == authentication.name")

@@ -45,12 +45,17 @@ public class BillingServiceTest {
         user.setAccount(account);
 
         BigDecimal amountToBill = BigDecimal.valueOf(50);
+        BigDecimal remainingAmount = BigDecimal.valueOf(50); // Остаток после списания
 
         billingService.billForServices(user, amountToBill);
 
         verify(accountRepository, times(1)).save(any(Account.class));
-        verify(notificationService, times(1)).notifyUserAboutBalance(eq("example@example.com"),
-                eq(BigDecimal.valueOf(50)), eq("1234567890"));
+        verify(notificationService, times(1)).notifyUserAboutBalance(
+                eq("example@example.com"),
+                eq(remainingAmount),
+                eq("1234567890"),
+                eq(amountToBill)
+        );
     }
 
 

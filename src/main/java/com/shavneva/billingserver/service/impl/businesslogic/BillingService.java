@@ -48,7 +48,7 @@ public class BillingService implements IBillingService<User> {
         accountRepository.save(account);
 
         // Уведомление пользователя о списании средств
-        iNotificationService.notifyUserAboutBalance(user.getEmail(), account.getAmount(), user.getNumber());
+        iNotificationService.notifyUserAboutBalance(user.getEmail(), account.getAmount(), user.getNumber(), tariffCost);
     }
 
     //выполняет пополнение счета для пользователя

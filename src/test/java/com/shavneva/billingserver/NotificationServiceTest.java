@@ -28,9 +28,10 @@ public class NotificationServiceTest {
     public void testNotifyUserAboutBalance_Email() {
         String userEmail = "example@example.com";
         BigDecimal balance = BigDecimal.valueOf(1000);
+        BigDecimal deductedAmount = BigDecimal.valueOf(20);
 
         // Вызываем метод, который должен отправить уведомление
-        notificationService.notifyUserAboutBalance(userEmail, balance, "123456789");
+        notificationService.notifyUserAboutBalance(userEmail, balance, "123456789", deductedAmount);
 
         // Проверяем, что уведомление было отправлено через EmailServiceProvider
         verify(IEmailServiceProvider).sendNotification(eq(userEmail), anyString(), anyString());

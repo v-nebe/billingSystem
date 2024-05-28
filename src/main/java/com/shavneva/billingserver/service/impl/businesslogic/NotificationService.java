@@ -26,10 +26,11 @@ public class NotificationService implements INotificationService {
     }
 
     @Override
-    public void notifyUserAboutBalance(String userEmail, BigDecimal balance, String phoneNumber) {
+    public void notifyUserAboutBalance(String userEmail, BigDecimal balance, String phoneNumber, BigDecimal deductedAmount) {
         User user = userRepository.findByEmail(userEmail);
         String subject = "Уведомление о балансе";
-        String message = "На вашем счете осталось: " + balance.toString();
+        String message = "С вашего счета списано: " + deductedAmount.toString() + ". На вашем счете осталось: " + balance.toString();
+
         if (user != null) {
             if ("email".equals(user.getNotificationType())) {
                 iEmailServiceProvider.sendNotification(userEmail, subject, message);
